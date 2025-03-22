@@ -1,0 +1,1980 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Predicción de Accidentes de Tráfico en Estados Unidos Utilizando un Enfoque de Voting Classifier con Machine Learning. &#8212; Machine Learning</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Informe_Machine_Learning_Accident';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Machine Learning - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Machine Learning - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="markdown-notebooks.html">Notebooks with MyST Markdown</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FInforme_Machine_Learning_Accident.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Informe_Machine_Learning_Accident.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Predicción de Accidentes de Tráfico en Estados Unidos Utilizando un Enfoque de Voting Classifier con Machine Learning.</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen">Resumen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodologia">Metodología</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#poblacion">Población:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#muestra">Muestra:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#justificacion-de-la-seleccion-de-la-muestra">Justificación de la Selección de la Muestra:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-de-machine-learning">Modelos de machine learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-metodos-de-conjunto">Ensemble (Métodos de conjunto):</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-regresion-logistica">1) Modelo de Regresión Logística:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arbol-de-decision">2) Árbol de Decisión:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maquina-de-soporte-vectorial-svm">3) Máquina de Soporte Vectorial (SVM):</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#voting-classifier">4) Voting Classifier:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diseno-general-tipo-de-estudio">Diseño general (Tipo de estudio)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#caracteristicas-del-diseno">Características del Diseño:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diccionario-de-variables">Diccionario de variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#valores-faltantes">Valores faltantes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-hot-encoding">One Hot Encoding</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#smote">SMOTE</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="prediccion-de-accidentes-de-trafico-en-estados-unidos-utilizando-un-enfoque-de-voting-classifier-con-machine-learning">
+<h1>Predicción de Accidentes de Tráfico en Estados Unidos Utilizando un Enfoque de Voting Classifier con Machine Learning.<a class="headerlink" href="#prediccion-de-accidentes-de-trafico-en-estados-unidos-utilizando-un-enfoque-de-voting-classifier-con-machine-learning" title="Link to this heading">#</a></h1>
+<section id="resumen">
+<h2>Resumen<a class="headerlink" href="#resumen" title="Link to this heading">#</a></h2>
+<p>Este proyecto busca desarrollar un modelo de predicción de accidentes de tráfico en Estados Unidos utilizando técnicas avanzadas de Machine Learning.
+A través de la integración de varios modelos predictivos mediante un Voting Classifier, se pretende mejorar la precisión y robustez del sistema predictivo en comparación con modelos individuales. La metodología empleada combina el <em>preprocesamiento de datos, la selección de características, el equilibrio de clases, grid search, cross validation y validación del modelo resultante haciendo uso de pipelines</em>.</p>
+</section>
+<section id="metodologia">
+<h2>Metodología<a class="headerlink" href="#metodologia" title="Link to this heading">#</a></h2>
+<section id="poblacion">
+<h3>Población:<a class="headerlink" href="#poblacion" title="Link to this heading">#</a></h3>
+<p>La población de interés para este estudio comprende todos los accidentes vehiculares que se han registrado en los Estados Unidos desde el inicio del año 2016 hasta la fecha más reciente disponible en nuestro conjunto de datos.</p>
+</section>
+<section id="muestra">
+<h3>Muestra:<a class="headerlink" href="#muestra" title="Link to this heading">#</a></h3>
+<p>Para los propósitos de este estudio, hemos restringido nuestro análisis a una muestra específica. Esta muestra consiste en accidentes vehiculares que se han registrado en el estado de California a partir del año 2022.</p>
+</section>
+<section id="justificacion-de-la-seleccion-de-la-muestra">
+<h3>Justificación de la Selección de la Muestra:<a class="headerlink" href="#justificacion-de-la-seleccion-de-la-muestra" title="Link to this heading">#</a></h3>
+<p>La elección de centrarse en el estado de California se debe a que este es el estado ccon mayor frecuencia de accidentes, adicionalmente, con el objetivo de disminuir el tiempo de computación. El año 2022 fue seleccionado debido a que se busca reducir el tiempo de ejecución de modelo debido a limitaciones de la capacidad computacional del equipo con el que se trabaja.</p>
+<ol class="arabic simple">
+<li><p>Recopilación de Datos:</p></li>
+</ol>
+<p>Se recopilaron datos relevantes relacionados con accidentes de tráfico en Estados Unidos, incluyendo variables como condiciones climáticas, ubicación, hora del día, entre otras.</p>
+<ol class="arabic simple" start="2">
+<li><p>Preprocesamiento de Datos:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Limpieza: Eliminación de valores nulos o imputación donde sea necesario.</p></li>
+<li><p>Codificación: Conversión de variables categóricas a numéricas.</p></li>
+<li><p>Escalado: Utilización de StandardScaler para normalizar las características.</p></li>
+</ul>
+<ol class="arabic simple" start="3">
+<li><p>Equilibrio de Clases:</p></li>
+</ol>
+<p>Dado el desequilibrio potencial en las clases (más accidentes con severidades menores que mayores), se utilizó la técnica SMOTE para equilibrar las clases en el conjunto de entrenamiento.</p>
+<ol class="arabic simple" start="4">
+<li><p>Construcción del Voting Classifier:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Se seleccionaron tres modelos base de clasificación: Logistic Regression, Decision Tree y Support Vector Machine.</p></li>
+<li><p>Cada modelo se optimizó individualmente utilizando validación cruzada y búsqueda de cuadrícula para hiperparámetros.</p></li>
+<li><p>Los modelos optimizados se integraron utilizando VotingClassifier con votación ‘soft’ para combinar las probabilidades.</p></li>
+</ul>
+<ol class="arabic simple" start="5">
+<li><p>Evaluación del Modelo:</p></li>
+</ol>
+<p>Se utilizó un conjunto de datos de prueba separado para evaluar el rendimiento del Voting Classifier.
+Las métricas de rendimiento incluyeron precisión, recall, F1-score y AUC-ROC.</p>
+</section>
+</section>
+<section id="modelos-de-machine-learning">
+<h2>Modelos de machine learning<a class="headerlink" href="#modelos-de-machine-learning" title="Link to this heading">#</a></h2>
+<section id="ensemble-metodos-de-conjunto">
+<h3>Ensemble (Métodos de conjunto):<a class="headerlink" href="#ensemble-metodos-de-conjunto" title="Link to this heading">#</a></h3>
+<p>Un ensemble, o método de conjunto, es una técnica en el aprendizaje automático que combina las predicciones de varios modelos con el objetivo de mejorar la robustez, precisión y reducir el error en las predicciones. La idea fundamental detrás de los ensambles es que múltiples modelos débiles pueden combinarse para formar un modelo fuerte y preciso. Los métodos de ensamble son especialmente efectivos para reducir el error debido al sesgo y la varianza, lo que lleva a mejores generalizaciones en datos no vistos.</p>
+</section>
+<section id="modelo-de-regresion-logistica">
+<h3>1) Modelo de Regresión Logística:<a class="headerlink" href="#modelo-de-regresion-logistica" title="Link to this heading">#</a></h3>
+<p>La Regresión Logística es un modelo estadístico que permite estimar la probabilidad de una variable categórica binaria en función de una o más variables predictoras. Es una extensión del modelo de regresión lineal adaptado a las predicciones de probabilidad. En casos de múltiples clases, la Regresión Logística se configura para estimar probabilidades para cada clase individual y luego seleccionar la clase con la mayor probabilidad (One vs Rest). Se utiliza el solver ‘saga’, una variante del método de descenso de gradiente, adecuado para conjuntos de datos de gran tamaño. Este solver se configura con una estrategia multinomial para manejar múltiples clases y utiliza la regularización L2 para evitar el sobreajuste penalizando los coeficientes más grandes.</p>
+</section>
+<section id="arbol-de-decision">
+<h3>2) Árbol de Decisión:<a class="headerlink" href="#arbol-de-decision" title="Link to this heading">#</a></h3>
+<p>Un Árbol de Decisión es un modelo gráfico que representa decisiones y sus posibles resultados en forma de un árbol. Es útil para problemas de clasificación y regresión. El árbol toma decisiones dividiendo el conjunto de datos en subconjuntos basados en condiciones sobre las características. Estas divisiones se realizan de manera que cada subconjunto se acerque lo más posible a tener etiquetas de una sola clase. Se establece una profundidad máxima para el árbol para garantizar que el modelo no sea demasiado complejo y evite el sobreajuste.</p>
+</section>
+<section id="maquina-de-soporte-vectorial-svm">
+<h3>3) Máquina de Soporte Vectorial (SVM):<a class="headerlink" href="#maquina-de-soporte-vectorial-svm" title="Link to this heading">#</a></h3>
+<p>Una SVM es un conjunto de métodos supervisados de aprendizaje utilizados para clasificación y regresión. Busca encontrar el hiperplano que mejor separa las clases en el espacio de características. El “mejor” hiperplano es aquel que maximiza el margen entre las dos clases. Las SVM son especialmente útiles cuando las clases no son linealmente separables. El kernel RBF (Radial Basis Function) permite a la SVM manejar relaciones no lineales al mapear los datos a un espacio de características de mayor dimensión. El parámetro de regularización C determina el compromiso entre maximizar el margen y minimizar la clasificación errónea.</p>
+</section>
+<section id="voting-classifier">
+<h3>4) Voting Classifier:<a class="headerlink" href="#voting-classifier" title="Link to this heading">#</a></h3>
+<p>Un Voting Classifier es una técnica de ensamblado que combina predicciones de múltiples modelos de aprendizaje automático para mejorar la robustez y la precisión de las predicciones. Funciona haciendo que cada modelo individual en el ensamblado “vote” por una clase, y luego la clase que recibe la mayoría de los votos es la clase predicha por el ensamblado completo. En este estudio, el Voting Classifier se compone de los tres modelos mencionados anteriormente.</p>
+</section>
+<section id="diseno-general-tipo-de-estudio">
+<h3>Diseño general (Tipo de estudio)<a class="headerlink" href="#diseno-general-tipo-de-estudio" title="Link to this heading">#</a></h3>
+<p>Este trabajo presenta un estudio predictivo basado en técnicas de aprendizaje automático. El objetivo principal es predecir la severidad de los accidentes en California durante el año 2022. Se hace uso de un conjunto de datos históricos desde 2016, con el propósito de entrenar y validar diferentes modelos de machine learning y, posteriormente, ensamblarlos para una predicción más robusta.</p>
+</section>
+</section>
+<section id="caracteristicas-del-diseno">
+<h2>Características del Diseño:<a class="headerlink" href="#caracteristicas-del-diseno" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Datos Históricos: Se utiliza un conjunto de datos de accidentes en Estados Unidos desde 2016. Sin embargo, el estudio se centra en el estado de California y en el año 2022 para hacer predicciones más precisas y contextualizadas.</p></li>
+<li><p>Enfoque de Muestreo: Se realiza una selección temporal y espacial, enfocándose en el año 2022 y en el estado de California. Esto garantiza que el estudio sea relevante y aplicable a la región y periodo de interés.</p></li>
+<li><p>Preprocesamiento: Antes de entrenar los modelos, se realiza un preprocesamiento de los datos, que incluye técnicas como la codificación de variables categóricas, la normalización de características y el manejo de desequilibrios de clases mediante la técnica SMOTE.</p></li>
+<li><p>Modelado: Se emplean tres modelos diferentes de aprendizaje automático: Regresión Logística, Árbol de Decisión y Máquina de Soporte Vectorial (SVM). Luego, estos modelos son ensamblados mediante un Voting Classifier para realizar predicciones combinadas.</p></li>
+<li><p>Validación: El rendimiento de los modelos se valida mediante técnicas como la división de datos en conjuntos de entrenamiento y prueba, y la evaluación de métricas de rendimiento como precisión, recall y F1-score.</p></li>
+</ol>
+<p>El diseño de este estudio se orienta hacia una metodología cuantitativa, utilizando técnicas de machine learning para desarrollar un modelo predictivo robusto y confiable que pueda ser utilizado en aplicaciones prácticas, como la planificación urbana o la gestión de la seguridad vial.</p>
+</section>
+<section id="diccionario-de-variables">
+<h2>Diccionario de variables<a class="headerlink" href="#diccionario-de-variables" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>ID: Identificador único de incidente</p></li>
+<li><p>Source: Fuente de la información</p></li>
+<li><p>Severity: Muestra la severidad del accidente, siendo 1 el menor impacto y 4 el  mayor.</p></li>
+<li><p>Start time y End Time: Tiempo de inicio y finalización del accidente.</p></li>
+<li><p>Start Lat, Start Lng, End Lat y End Lng: Latitudes y longitudes iniciales y finales.</p></li>
+<li><p>Distance: La longitud de la carretera recorrida en el incidente.</p></li>
+<li><p>Description: Descripción del accidente</p></li>
+<li><p>Street: Nombre de la calle del accidente.</p></li>
+<li><p>City, County, State, Country:  Ciudad, Condado, Estado y País.</p></li>
+<li><p>Zipcode: Código postal de la ubicación del accidente.</p></li>
+<li><p>Timezone: Zona de tiempo basado en la localización del accidente.</p></li>
+<li><p>Airport_Code: Código del aeropuerto.</p></li>
+<li><p>Weather_Timestamp:  Marca de tiempo del registro de observación meteorológica</p></li>
+<li><p>Wind_Chill (F),  Temperature (F), Humidity (%), Pressure (in), Wind direction (mph), Precipitation (in), Weather condition: Condiciones del ambiente de viento frío, humedad, presión, dirección del viento, precipitación.</p></li>
+<li><p>Visibility (mi): Visibilidad en millas.</p></li>
+<li><p>Amenity, Bump, Crossing, Give_way, Junction, No Exit, Roundabout, Station, Stop, Traffic Calming, Traffic_Signal, Turning_Loop:</p></li>
+</ul>
+<p>Indica la presencia de una amenidad, baches, cruce, ceda el paso, unión, no salida, rotonda, estación, pare, pacificación del tráfico, señal de tráfico, bucle giratorio.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">klib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;C:\Users\jose_\OneDrive\Documentos guardados\Maestria analisis de datos\Machine Learning Likni\Machine learning Likir\Informe_Machine_Learning\US_Accidents_March23.csv&quot;</span>
+<span class="n">df</span> <span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">path</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;C:\Users\jose_\OneDrive\Documentos guardados\Maestria analisis de datos\Machine Learning Likni\Machine learning Likir\Informe_Machine_Learning\US_Accidents_March23.csv&quot;</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">df</span> <span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+<span class="nn">File c:\Users\jose_\anaconda3\envs\ml_venl\lib\site-packages\pandas\io\parsers\readers.py:1026,</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options, dtype_backend)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1013</span> <span class="n">kwds_defaults</span> <span class="o">=</span> <span class="n">_refine_defaults_read</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1014</span>     <span class="n">dialect</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1015</span>     <span class="n">delimiter</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1022</span>     <span class="n">dtype_backend</span><span class="o">=</span><span class="n">dtype_backend</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1023</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1024</span> <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1026</span> <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+
+<span class="nn">File c:\Users\jose_\anaconda3\envs\ml_venl\lib\site-packages\pandas\io\parsers\readers.py:626,</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">623</span>     <span class="k">return</span> <span class="n">parser</span>
+<span class="g g-Whitespace">    </span><span class="mi">625</span> <span class="k">with</span> <span class="n">parser</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">626</span>     <span class="k">return</span> <span class="n">parser</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">nrows</span><span class="p">)</span>
+
+<span class="nn">File c:\Users\jose_\anaconda3\envs\ml_venl\lib\site-packages\pandas\io\parsers\readers.py:1923,</span> in <span class="ni">TextFileReader.read</span><span class="nt">(self, nrows)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1916</span> <span class="n">nrows</span> <span class="o">=</span> <span class="n">validate_integer</span><span class="p">(</span><span class="s2">&quot;nrows&quot;</span><span class="p">,</span> <span class="n">nrows</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1917</span> <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1918</span>     <span class="c1"># error: &quot;ParserBase&quot; has no attribute &quot;read&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1919</span>     <span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1920</span>         <span class="n">index</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1921</span>         <span class="n">columns</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1922</span>         <span class="n">col_dict</span><span class="p">,</span>
+<span class="ne">-&gt; </span><span class="mi">1923</span>     <span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">read</span><span class="p">(</span>  <span class="c1"># type: ignore[attr-defined]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1924</span>         <span class="n">nrows</span>
+<span class="g g-Whitespace">   </span><span class="mi">1925</span>     <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1926</span> <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1927</span>     <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="nn">File c:\Users\jose_\anaconda3\envs\ml_venl\lib\site-packages\pandas\io\parsers\c_parser_wrapper.py:236,</span> in <span class="ni">CParserWrapper.read</span><span class="nt">(self, nrows)</span>
+<span class="g g-Whitespace">    </span><span class="mi">234</span>     <span class="n">chunks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reader</span><span class="o">.</span><span class="n">read_low_memory</span><span class="p">(</span><span class="n">nrows</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">235</span>     <span class="c1"># destructive to chunks</span>
+<span class="ne">--&gt; </span><span class="mi">236</span>     <span class="n">data</span> <span class="o">=</span> <span class="n">_concatenate_chunks</span><span class="p">(</span><span class="n">chunks</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">238</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">239</span>     <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">nrows</span><span class="p">)</span>
+
+<span class="nn">File c:\Users\jose_\anaconda3\envs\ml_venl\lib\site-packages\pandas\io\parsers\c_parser_wrapper.py:369,</span> in <span class="ni">_concatenate_chunks</span><span class="nt">(chunks)</span>
+<span class="g g-Whitespace">    </span><span class="mi">367</span> <span class="n">arrs</span> <span class="o">=</span> <span class="p">[</span><span class="n">chunk</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">chunks</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">368</span> <span class="c1"># Check each arr for consistent types.</span>
+<span class="ne">--&gt; </span><span class="mi">369</span> <span class="n">dtypes</span> <span class="o">=</span> <span class="p">{</span><span class="n">a</span><span class="o">.</span><span class="n">dtype</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">arrs</span><span class="p">}</span>
+<span class="g g-Whitespace">    </span><span class="mi">370</span> <span class="n">non_cat_dtypes</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">dtypes</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">CategoricalDtype</span><span class="p">)}</span>
+<span class="g g-Whitespace">    </span><span class="mi">372</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">dtypes</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+<span class="nn">File c:\Users\jose_\anaconda3\envs\ml_venl\lib\site-packages\pandas\io\parsers\c_parser_wrapper.py:369,</span> in <span class="ni">&lt;setcomp&gt;</span><span class="nt">(.0)</span>
+<span class="g g-Whitespace">    </span><span class="mi">367</span> <span class="n">arrs</span> <span class="o">=</span> <span class="p">[</span><span class="n">chunk</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">chunks</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">368</span> <span class="c1"># Check each arr for consistent types.</span>
+<span class="ne">--&gt; </span><span class="mi">369</span> <span class="n">dtypes</span> <span class="o">=</span> <span class="p">{</span><span class="n">a</span><span class="o">.</span><span class="n">dtype</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">arrs</span><span class="p">}</span>
+<span class="g g-Whitespace">    </span><span class="mi">370</span> <span class="n">non_cat_dtypes</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">dtypes</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">CategoricalDtype</span><span class="p">)}</span>
+<span class="g g-Whitespace">    </span><span class="mi">372</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">dtypes</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 7728394 entries, 0 to 7728393
+Data columns (total 46 columns):
+ #   Column                 Dtype  
+---  ------                 -----  
+ 0   ID                     object 
+ 1   Source                 object 
+ 2   Severity               int64  
+ 3   Start_Time             object 
+ 4   End_Time               object 
+ 5   Start_Lat              float64
+ 6   Start_Lng              float64
+ 7   End_Lat                float64
+ 8   End_Lng                float64
+ 9   Distance(mi)           float64
+ 10  Description            object 
+ 11  Street                 object 
+ 12  City                   object 
+ 13  County                 object 
+ 14  State                  object 
+ 15  Zipcode                object 
+ 16  Country                object 
+ 17  Timezone               object 
+ 18  Airport_Code           object 
+ 19  Weather_Timestamp      object 
+ 20  Temperature(F)         float64
+ 21  Wind_Chill(F)          float64
+ 22  Humidity(%)            float64
+ 23  Pressure(in)           float64
+ 24  Visibility(mi)         float64
+ 25  Wind_Direction         object 
+ 26  Wind_Speed(mph)        float64
+ 27  Precipitation(in)      float64
+ 28  Weather_Condition      object 
+ 29  Amenity                bool   
+ 30  Bump                   bool   
+ 31  Crossing               bool   
+ 32  Give_Way               bool   
+ 33  Junction               bool   
+ 34  No_Exit                bool   
+ 35  Railway                bool   
+ 36  Roundabout             bool   
+ 37  Station                bool   
+ 38  Stop                   bool   
+ 39  Traffic_Calming        bool   
+ 40  Traffic_Signal         bool   
+ 41  Turning_Loop           bool   
+ 42  Sunrise_Sunset         object 
+ 43  Civil_Twilight         object 
+ 44  Nautical_Twilight      object 
+ 45  Astronomical_Twilight  object 
+dtypes: bool(13), float64(12), int64(1), object(20)
+memory usage: 2.0+ GB
+</pre></div>
+</div>
+</div>
+</div>
+<p>Los datos iniciales constan de 7.728.394 de datos con 46 columnas, de las cuales 20 son categóricas, 13 booleanas y 13 númericas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Reducir el uso de la memoria</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">reduce_mem_usage</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+
+    <span class="n">start_mem</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1024</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">start_mem_GB</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1024</span><span class="o">**</span><span class="mi">3</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Initial memory usage of dataframe is </span><span class="si">{</span><span class="n">start_mem</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> MB/</span><span class="si">{</span><span class="n">start_mem_GB</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> GB&#39;</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="n">col_type</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span>
+        
+        <span class="k">if</span> <span class="n">col_type</span> <span class="o">!=</span> <span class="nb">object</span><span class="p">:</span>
+            <span class="n">c_min</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+            <span class="n">c_max</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">col_type</span><span class="p">)[:</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;int&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">c_min</span> <span class="o">&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">iinfo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span><span class="o">.</span><span class="n">min</span> <span class="ow">and</span> <span class="n">c_max</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">iinfo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">:</span>
+                    <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">c_min</span> <span class="o">&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">iinfo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span><span class="o">.</span><span class="n">min</span> <span class="ow">and</span> <span class="n">c_max</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">iinfo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">:</span>
+                    <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">c_min</span> <span class="o">&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">iinfo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span><span class="o">.</span><span class="n">min</span> <span class="ow">and</span> <span class="n">c_max</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">iinfo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">:</span>
+                    <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">c_min</span> <span class="o">&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">iinfo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span><span class="o">.</span><span class="n">min</span> <span class="ow">and</span> <span class="n">c_max</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">iinfo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">:</span>
+                    <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>  
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">c_min</span> <span class="o">&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float16</span><span class="p">)</span><span class="o">.</span><span class="n">min</span> <span class="ow">and</span> <span class="n">c_max</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float16</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">:</span>
+                    <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float16</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">c_min</span> <span class="o">&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span><span class="o">.</span><span class="n">min</span> <span class="ow">and</span> <span class="n">c_max</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">:</span>
+                    <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+
+    <span class="n">end_mem</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1024</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">end_mem_GB</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1024</span><span class="o">**</span><span class="mi">3</span>
+    <span class="n">reduction</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="n">start_mem</span> <span class="o">-</span> <span class="n">end_mem</span><span class="p">)</span> <span class="o">/</span> <span class="n">start_mem</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Memory usage after optimization is: </span><span class="si">{</span><span class="n">end_mem</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> MB/</span><span class="si">{</span><span class="n">end_mem_GB</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> GB&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Decreased by </span><span class="si">{</span><span class="n">reduction</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">df</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">reduce_mem_usage</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Initial memory usage of dataframe is 10870.28 MB/10.62 GB
+Memory usage after optimization is: 3582.58 MB/3.50 GB
+Decreased by 67.0%
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conteo</span><span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;State&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">conteo</span><span class="p">)</span>
+<span class="c1">#conteo[:10]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State
+CA    1741433
+FL     880192
+TX     582837
+SC     382557
+NY     347960
+NC     338199
+VA     303301
+PA     296620
+MN     192084
+OR     179660
+AZ     170609
+GA     169234
+IL     168958
+TN     167388
+MI     162191
+LA     149701
+NJ     140719
+MD     140417
+OH     118115
+WA     108221
+AL     101044
+UT      97079
+CO      90885
+OK      83647
+MO      77323
+CT      71005
+IN      67224
+MA      61996
+WI      34688
+KY      32254
+NE      28870
+MT      28496
+IA      26307
+AR      22780
+NV      21665
+KS      20992
+DC      18630
+RI      16971
+MS      15181
+DE      14097
+WV      13793
+ID      11376
+NM      10325
+NH      10213
+WY       3757
+ND       3487
+ME       2698
+VT        926
+SD        289
+Name: count, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Bar Chart to Visualize Top 10 cities by number of accidents</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">conteo</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Top 10 de las ciudades con mas accidentes&#39;</span><span class="p">,</span>
+       <span class="n">xlabel</span> <span class="o">=</span> <span class="s1">&#39;Cities&#39;</span><span class="p">,</span>
+       <span class="n">ylabel</span> <span class="o">=</span> <span class="s1">&#39;Numero de accidentes&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/294ce088e3a620e3e85858dfa542a19ff30106436cc30d3e8c9f67ce2c7478bf.png" src="_images/294ce088e3a620e3e85858dfa542a19ff30106436cc30d3e8c9f67ce2c7478bf.png" />
+</div>
+</div>
+<p>Se escoge el estado con mayor número de incidentes registrados, es decir, California.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span><span class="o">=</span><span class="s1">&#39;CA&#39;</span>
+
+<span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">State</span><span class="o">==</span><span class="n">state</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;State&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+Index: 1741433 entries, 728 to 7728393
+Data columns (total 45 columns):
+ #   Column                 Dtype   
+---  ------                 -----   
+ 0   ID                     category
+ 1   Source                 category
+ 2   Severity               int8    
+ 3   Start_Time             category
+ 4   End_Time               category
+ 5   Start_Lat              float16 
+ 6   Start_Lng              float16 
+ 7   End_Lat                float16 
+ 8   End_Lng                float16 
+ 9   Distance(mi)           float16 
+ 10  Description            category
+ 11  Street                 category
+ 12  City                   category
+ 13  County                 category
+ 14  Zipcode                category
+ 15  Country                category
+ 16  Timezone               category
+ 17  Airport_Code           category
+ 18  Weather_Timestamp      category
+ 19  Temperature(F)         float16 
+ 20  Wind_Chill(F)          float16 
+ 21  Humidity(%)            float16 
+ 22  Pressure(in)           float16 
+ 23  Visibility(mi)         float16 
+ 24  Wind_Direction         category
+ 25  Wind_Speed(mph)        float16 
+ 26  Precipitation(in)      float16 
+ 27  Weather_Condition      category
+ 28  Amenity                float16 
+ 29  Bump                   float16 
+ 30  Crossing               float16 
+ 31  Give_Way               float16 
+ 32  Junction               float16 
+ 33  No_Exit                float16 
+ 34  Railway                float16 
+ 35  Roundabout             float16 
+ 36  Station                float16 
+ 37  Stop                   float16 
+ 38  Traffic_Calming        float16 
+ 39  Traffic_Signal         float16 
+ 40  Turning_Loop           float16 
+ 41  Sunrise_Sunset         category
+ 42  Civil_Twilight         category
+ 43  Nautical_Twilight      category
+ 44  Astronomical_Twilight  category
+dtypes: category(19), float16(25), int8(1)
+memory usage: 1.2 GB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">accidents_severity</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Severity&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()[</span><span class="s1">&#39;ID&#39;</span><span class="p">]</span>
+<span class="n">accidents_severity</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Severity
+1      10284
+2    1445833
+3     271814
+4      13502
+Name: ID, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configurar gráficos de Seaborn</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
+
+<span class="c1"># Gráfico de distribución de severidad de accidentes</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Severity&quot;</span><span class="p">],</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;coolwarm&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribución de Severidad de Accidentes&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Severidad&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Cantidad de Accidentes&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a672fedfacba715573d93c8d2a5775299d8b3d6fa40b4bafd09217b17ac65166.png" src="_images/a672fedfacba715573d93c8d2a5775299d8b3d6fa40b4bafd09217b17ac65166.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s visualize that</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">subplot_kw</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">aspect</span><span class="o">=</span><span class="s2">&quot;equal&quot;</span><span class="p">))</span>
+<span class="n">label</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="n">accidents_severity</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">label</span><span class="p">,</span>
+        <span class="n">autopct</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%1.1f%%</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">pctdistance</span><span class="o">=</span><span class="mf">0.85</span><span class="p">)</span>
+<span class="n">circle</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">Circle</span><span class="p">(</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="mf">0.7</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+<span class="n">p</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">add_artist</span><span class="p">(</span><span class="n">circle</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Accidentes por severidad&quot;</span><span class="p">,</span><span class="n">fontdict</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;fontsize&#39;</span><span class="p">:</span> <span class="mi">16</span><span class="p">})</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/55362a7805ec829e19dfa048a04598509e2058e20c9fd0460c695c21bbc58e05.png" src="_images/55362a7805ec829e19dfa048a04598509e2058e20c9fd0460c695c21bbc58e05.png" />
+</div>
+</div>
+<p>El 0,8% de los accidentes han sido muy severos indicando como el grado 4</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">font_scale</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span> <span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="mi">30</span><span class="p">),</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6e9396ac0ff054c31f8096b1a4a94b75464d2a6c7843c5e7a5d0e11a14547a2a.png" src="_images/6e9396ac0ff054c31f8096b1a4a94b75464d2a6c7843c5e7a5d0e11a14547a2a.png" />
+</div>
+</div>
+<p>Se remueven las siguientes columnas:</p>
+<ul class="simple">
+<li><p>Wind chill (sensación térmica) porque esta se ve explicada por la variable temperatura.</p></li>
+<li><p>Presion debido a que no es de relevancia para la ocurrencia de accidentes por definición del contexto.</p></li>
+<li><p>Velocidad del viento no es una variable influyente para el contexto del análisis.</p></li>
+<li><p>Amenities(comodidades) ya que no se considera que tenga incidencia en los datos, además esta desbalanceada.</p></li>
+<li><p>Railway de acuerdo al criterio del ejercicio no resulta relevante.</p></li>
+<li><p>Roundabout tse encuentra muy desbalanceada.</p></li>
+<li><p>Station ya que en Estados Unidos las stations están bien delimitadas.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Se</span> <span class="n">utiliza</span> <span class="n">la</span> <span class="n">libreria</span> <span class="n">Klib</span> <span class="n">para</span> <span class="n">realizar</span> <span class="n">la</span> <span class="n">limpieza</span> <span class="n">de</span> <span class="n">los</span> <span class="n">datos</span><span class="p">,</span> <span class="n">colocar</span> <span class="n">en</span> <span class="n">minúsculas</span> <span class="n">las</span> <span class="n">variables</span><span class="p">,</span> <span class="n">cambiar</span> <span class="n">los</span> <span class="n">espacios</span> <span class="n">por</span> <span class="n">guión</span> <span class="n">bajo</span><span class="p">,</span> <span class="n">eliminar</span> <span class="n">las</span> <span class="n">características</span> <span class="n">que</span> <span class="n">toman</span> <span class="n">un</span> <span class="n">único</span> <span class="n">valor</span> <span class="p">(</span><span class="n">variables</span> <span class="n">redundantes</span><span class="p">)</span><span class="o">.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">klib</span><span class="o">.</span><span class="n">data_cleaning</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shape of cleaned data: (1741433, 43) - Remaining NAs: 2816193
+
+
+Dropped rows: 0
+     of which 0 duplicates. (Rows (first 150 shown): [])
+
+Dropped columns: 2
+     of which 2 single valued.     Columns: [&#39;country&#39;, &#39;turning_loop&#39;]
+Dropped missing values: 0
+Reduced memory by at least: 82.77 MB (-6.44%)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Se realiza analisis solamente para los años posteriores al 2022 ya que por pa pandemia del COVID-19 puede alterar los datos</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Year&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">2022</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>A continuación se realiza la transformación de las columnas start_time y end_time en año, mes, día, hora y día de la semana. Esto debido a la posible influencia de estas variables en la frecuencia de los accidentes.</p>
+<p>Adicionalmente, se calcula la duración de los accidentes y se eliminan datos incoherentes (tiempos &lt; 0).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;start_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;start_time&#39;</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;end_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;end_time&#39;</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
+
+
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;start_time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Month&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;start_time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span>  <span class="c1"># Changed to give numeric month</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Day&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;start_time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">day</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Hour&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;start_time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">hour</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Weekday&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;start_time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">weekday</span>  <span class="c1"># Changed to give numeric weekday (Monday=0, Sunday=6)</span>
+
+
+<span class="n">td</span> <span class="o">=</span> <span class="s1">&#39;Duracion(min)&#39;</span>
+<span class="n">df</span><span class="p">[</span><span class="n">td</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;end_time&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;start_time&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">))</span>
+
+
+<span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;start_time&quot;</span><span class="p">,</span> <span class="s2">&quot;end_time&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;source&#39;</span><span class="p">,</span> <span class="s1">&#39;wind_chill_f&#39;</span><span class="p">,</span> <span class="s1">&#39;pressure_in&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;wind_speed_mph&#39;</span><span class="p">,</span> <span class="s1">&#39;amenity&#39;</span><span class="p">,</span> <span class="s1">&#39;railway&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;roundabout&#39;</span><span class="p">,</span> <span class="s1">&#39;station&#39;</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Se revisan las columnas numericas para quietar las que no son relevantes</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">non_numeric_columns</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">non_numeric_columns</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;description&#39;, &#39;street&#39;, &#39;city&#39;, &#39;county&#39;, &#39;zipcode&#39;, &#39;timezone&#39;,
+       &#39;airport_code&#39;, &#39;weather_timestamp&#39;, &#39;wind_direction&#39;,
+       &#39;weather_condition&#39;, &#39;sunrise_sunset&#39;, &#39;civil_twilight&#39;,
+       &#39;nautical_twilight&#39;, &#39;astronomical_twilight&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unique_values</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">,</span> <span class="s1">&#39;street&#39;</span><span class="p">,</span> <span class="s1">&#39;city&#39;</span><span class="p">,</span> <span class="s1">&#39;county&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;zipcode&#39;</span><span class="p">,</span> <span class="s1">&#39;timezone&#39;</span><span class="p">,</span> <span class="s1">&#39;airport_code&#39;</span><span class="p">,</span> <span class="s1">&#39;weather_timestamp&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;wind_direction&#39;</span><span class="p">,</span> <span class="s1">&#39;weather_condition&#39;</span><span class="p">,</span> <span class="s1">&#39;sunrise_sunset&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;civil_twilight&#39;</span><span class="p">,</span> <span class="s1">&#39;nautical_twilight&#39;</span><span class="p">,</span> <span class="s1">&#39;astronomical_twilight&#39;</span><span class="p">]:</span>
+    <span class="n">unique_values</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+
+<span class="n">unique_values</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;description&#39;: [&#39;Crash on CA-138 Pearblossom Hwy at 96th St.&#39;, &#39;Crash on US-101 Southbound before Exit 44 Moo..., &#39;#1 lane blocked due to crash on I-5 Northboun..., &#39;HOV lane blocked due to crash on CA-57 Southb..., &#39;Crash on Valley View Ave at I-5.&#39;, ..., &#39;Incident on I-805 NB near MESA COLLEGE Drive ..., &#39;Incident on CA-35 near BEAR GULCH RD Drive wi..., &#39;Incident on I-5 NB near NEWHALL RANCH RD Righ..., &#39;Stationary traffic from US-101 S to Charlesto..., &#39;Accident on Dorsey Dr (CA-49) from Brunswick ...]
+ Length: 193652
+ Categories (3761578, object): [&#39; 1039 GOLDEN BEAR - BOT&#39;, &#39; 1183 1125 IN IS 219/DALE START PD&#39;, &#39; 1183 1182 1125&#39;, &#39; 1183 ONE PTY HBD START PD JSO MAK RD&#39;, ..., &#39; The left lane is closed in both directions n..., &#39; The road is closed at Exit 60 (Dale Earnhard..., &#39; Two right lanes closed.&#39;, &#39; VEHICLE CRASH I77 SB NEAR LAKEVIEW ROAD THAT...],
+ &#39;street&#39;: [&#39;Pearblossom Hwy&#39;, &#39;US-101&#39;, &#39;I-5&#39;, &#39;CA-57&#39;, &#39;Firestone Blvd&#39;, ..., &#39;Mercedes Ave&#39;, &#39; 6 1/2 Ave&#39;, &#39; County Road 69&#39;, &#39; W Lincoln Rd&#39;, &#39; Cottage Grove Way&#39;]
+ Length: 33536
+ Categories (336306, object): [&#39; 1 1/2 Ave&#39;, &#39; 1 Mile Rd&#39;, &#39; 1-2&#39;, &#39; 1/2 Ave&#39;, ..., &#39;Zygmunt Dr&#39;, &#39;de Lee Way&#39;, &#39;del Tura Plaza Cir&#39;, &#39;william Carey Dr&#39;],
+ &#39;city&#39;: [&#39;Littlerock&#39;, &#39;Thousand Oaks&#39;, &#39;Sacramento&#39;, &#39;Anaheim&#39;, &#39;Santa Fe Springs&#39;, ..., &#39;Scott Bar&#39;, &#39;Robbins&#39;, &#39;Amador City&#39;, NaN, &#39;Lomita&#39;]
+ Length: 1143
+ Categories (13678, object): [&#39;Aaronsburg&#39;, &#39;Abbeville&#39;, &#39;Abbotsford&#39;, &#39;Abbott&#39;, ..., &#39;Zumbro Falls&#39;, &#39;Zumbrota&#39;, &#39;Zuni&#39;, &#39;Zwingle&#39;],
+ &#39;county&#39;: [&#39;Los Angeles&#39;, &#39;Ventura&#39;, &#39;Sacramento&#39;, &#39;Orange&#39;, &#39;Merced&#39;, ..., &#39;Lassen&#39;, &#39;Del Norte&#39;, &#39;Imperial&#39;, &#39;Modoc&#39;, &#39;Alpine&#39;]
+ Length: 58
+ Categories (1871, object): [&#39;Abbeville&#39;, &#39;Acadia&#39;, &#39;Accomack&#39;, &#39;Ada&#39;, ..., &#39;Yuba&#39;, &#39;Yuma&#39;, &#39;Zavala&#39;, &#39;Ziebach&#39;],
+ &#39;zipcode&#39;: [&#39;93543&#39;, &#39;91360&#39;, &#39;95811&#39;, &#39;92806&#39;, &#39;90670&#39;, ..., &#39;95020-5618&#39;, &#39;90262-1725&#39;, &#39;90059-1462&#39;, &#39;93036-1645&#39;, &#39;94303-4622&#39;]
+ Length: 52915
+ Categories (825094, object): [&#39;01001&#39;, &#39;01001-1344&#39;, &#39;01001-1832&#39;, &#39;01001-2111&#39;, ..., &#39;99362-1879&#39;, &#39;99371&#39;, &#39;99401-9712&#39;, &#39;99403&#39;],
+ &#39;timezone&#39;: [&#39;US/Pacific&#39;, NaN, &#39;US/Mountain&#39;]
+ Categories (4, object): [&#39;US/Central&#39;, &#39;US/Eastern&#39;, &#39;US/Mountain&#39;, &#39;US/Pacific&#39;],
+ &#39;airport_code&#39;: [&#39;KPMD&#39;, &#39;KCMA&#39;, &#39;KSAC&#39;, &#39;KFUL&#39;, &#39;KMCE&#39;, ..., &#39;KDRA&#39;, &#39;KAAT&#39;, &#39;KBOK&#39;, &#39;KLMT&#39;, &#39;KRNO&#39;]
+ Length: 135
+ Categories (2045, object): [&#39;K01M&#39;, &#39;K04V&#39;, &#39;K04W&#39;, &#39;K06D&#39;, ..., &#39;KYKN&#39;, &#39;KYNG&#39;, &#39;KZPH&#39;, &#39;KZZV&#39;],
+ &#39;weather_timestamp&#39;: [&#39;2022-09-08 01:53:00&#39;, &#39;2022-09-08 01:55:00&#39;, &#39;2022-09-07 21:53:00&#39;, &#39;2022-09-08 02:53:00&#39;, &#39;2022-09-08 12:53:00&#39;, ..., &#39;2022-08-24 17:35:00&#39;, &#39;2022-06-10 07:00:00&#39;, &#39;2022-12-27 22:22:00&#39;, &#39;2022-05-04 11:54:00&#39;, &#39;2022-12-01 19:34:00&#39;]
+ Length: 70811
+ Categories (941331, object): [&#39;2016-01-14 19:51:00&#39;, &#39;2016-02-08 00:53:00&#39;, &#39;2016-02-08 05:51:00&#39;, &#39;2016-02-08 05:53:00&#39;, ..., &#39;2023-03-31 23:10:00&#39;, &#39;2023-03-31 23:15:00&#39;, &#39;2023-03-31 23:32:00&#39;, &#39;2023-03-31 23:53:00&#39;],
+ &#39;wind_direction&#39;: [&#39;W&#39;, &#39;WNW&#39;, &#39;CALM&#39;, &#39;SSW&#39;, &#39;ENE&#39;, ..., &#39;NNE&#39;, &#39;NNW&#39;, NaN, &#39;ESE&#39;, &#39;NE&#39;]
+ Length: 19
+ Categories (24, object): [&#39;CALM&#39;, &#39;Calm&#39;, &#39;E&#39;, &#39;ENE&#39;, ..., &#39;W&#39;, &#39;WNW&#39;, &#39;WSW&#39;, &#39;West&#39;],
+ &#39;weather_condition&#39;: [&#39;Fair&#39;, &#39;Haze&#39;, &#39;Mostly Cloudy&#39;, &#39;Partly Cloudy&#39;, &#39;Light Rain&#39;, ..., &#39;Thunder / Windy&#39;, &#39;Light Snow Shower&#39;, &#39;Heavy T-Storm / Windy&#39;, &#39;Thunder and Hail&#39;, &#39;Light Snow with Thunder&#39;]
+ Length: 61
+ Categories (144, object): [&#39;Blowing Dust&#39;, &#39;Blowing Dust / Windy&#39;, &#39;Blowing Sand&#39;, &#39;Blowing Snow&#39;, ..., &#39;Widespread Dust&#39;, &#39;Widespread Dust / Windy&#39;, &#39;Wintry Mix&#39;, &#39;Wintry Mix / Windy&#39;],
+ &#39;sunrise_sunset&#39;: [&#39;Night&#39;, &#39;Day&#39;, NaN]
+ Categories (2, object): [&#39;Day&#39;, &#39;Night&#39;],
+ &#39;civil_twilight&#39;: [&#39;Night&#39;, &#39;Day&#39;, NaN]
+ Categories (2, object): [&#39;Day&#39;, &#39;Night&#39;],
+ &#39;nautical_twilight&#39;: [&#39;Night&#39;, &#39;Day&#39;, NaN]
+ Categories (2, object): [&#39;Day&#39;, &#39;Night&#39;],
+ &#39;astronomical_twilight&#39;: [&#39;Night&#39;, &#39;Day&#39;, NaN]
+ Categories (2, object): [&#39;Day&#39;, &#39;Night&#39;]}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Se observa que la variable de weather condition tiene muchos valores, se crean categorías o bins debido a la posible importancia en el contexto de accidentes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weather_bins</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Clear&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Clear&#39;</span><span class="p">,</span> <span class="s1">&#39;Fair&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Cloudy&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Cloudy&#39;</span><span class="p">,</span> <span class="s1">&#39;Mostly Cloudy&#39;</span><span class="p">,</span> <span class="s1">&#39;Partly Cloudy&#39;</span><span class="p">,</span> <span class="s1">&#39;Scattered Clouds&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Rainy&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Light Rain&#39;</span><span class="p">,</span> <span class="s1">&#39;Rain&#39;</span><span class="p">,</span> <span class="s1">&#39;Light Freezing Drizzle&#39;</span><span class="p">,</span> <span class="s1">&#39;Light Drizzle&#39;</span><span class="p">,</span> <span class="s1">&#39;Heavy Rain&#39;</span><span class="p">,</span> <span class="s1">&#39;Light Freezing Rain&#39;</span><span class="p">,</span> <span class="s1">&#39;Drizzle&#39;</span><span class="p">,</span> <span class="s1">&#39;Light Freezing Fog&#39;</span><span class="p">,</span> <span class="s1">&#39;Light Rain Showers&#39;</span><span class="p">,</span> <span class="s1">&#39;Showers in the Vicinity&#39;</span><span class="p">,</span> <span class="s1">&#39;T-Storm&#39;</span><span class="p">,</span> <span class="s1">&#39;Thunder&#39;</span><span class="p">,</span> <span class="s1">&#39;Patches of Fog&#39;</span><span class="p">,</span> <span class="s1">&#39;Heavy T-Storm&#39;</span><span class="p">,</span> <span class="s1">&#39;Heavy Thunderstorms and Rain&#39;</span><span class="p">,</span> <span class="s1">&#39;Funnel Cloud&#39;</span><span class="p">,</span> <span class="s1">&#39;Heavy T-Storm / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Heavy Thunderstorms and Snow&#39;</span><span class="p">,</span> <span class="s1">&#39;Rain / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Heavy Rain / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Squalls&#39;</span><span class="p">,</span> <span class="s1">&#39;Heavy Ice Pellets&#39;</span><span class="p">,</span> <span class="s1">&#39;Thunder / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Drizzle and Fog&#39;</span><span class="p">,</span> <span class="s1">&#39;T-Storm / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Smoke / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Haze / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Light Drizzle / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Widespread Dust / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Wintry Mix&#39;</span><span class="p">,</span> <span class="s1">&#39;Wintry Mix / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Light Snow with Thunder&#39;</span><span class="p">,</span> <span class="s1">&#39;Fog / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Snow and Thunder&#39;</span><span class="p">,</span> <span class="s1">&#39;Sleet / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Heavy Freezing Rain / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Squalls / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Light Rain Shower / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Snow and Thunder / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Light Sleet / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Sand / Dust Whirlwinds&#39;</span><span class="p">,</span> <span class="s1">&#39;Mist / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Drizzle / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Duststorm&#39;</span><span class="p">,</span> <span class="s1">&#39;Sand / Dust Whirls Nearby&#39;</span><span class="p">,</span> <span class="s1">&#39;Thunder and Hail&#39;</span><span class="p">,</span> <span class="s1">&#39;Freezing Rain / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Light Snow Shower / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Partial Fog&#39;</span><span class="p">,</span> <span class="s1">&#39;Thunder / Wintry Mix / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Patches of Fog / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Rain and Sleet&#39;</span><span class="p">,</span> <span class="s1">&#39;Light Snow Grains&#39;</span><span class="p">,</span> <span class="s1">&#39;Partial Fog / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Sand / Dust Whirlwinds / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Heavy Snow with Thunder&#39;</span><span class="p">,</span> <span class="s1">&#39;Heavy Blowing Snow&#39;</span><span class="p">,</span> <span class="s1">&#39;Low Drifting Snow&#39;</span><span class="p">,</span> <span class="s1">&#39;Light Hail&#39;</span><span class="p">,</span> <span class="s1">&#39;Light Thunderstorm&#39;</span><span class="p">,</span> <span class="s1">&#39;Heavy Freezing Drizzle&#39;</span><span class="p">,</span> <span class="s1">&#39;Light Blowing Snow&#39;</span><span class="p">,</span> <span class="s1">&#39;Thunderstorms and Snow&#39;</span><span class="p">,</span> <span class="s1">&#39;Heavy Rain Showers&#39;</span><span class="p">,</span> <span class="s1">&#39;Rain Shower / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Sleet and Thunder&#39;</span><span class="p">,</span> <span class="s1">&#39;Heavy Sleet and Thunder&#39;</span><span class="p">,</span> <span class="s1">&#39;Drifting Snow / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Shallow Fog / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Thunder and Hail / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Heavy Sleet / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Sand / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Heavy Rain Shower / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Blowing Snow Nearby&#39;</span><span class="p">,</span> <span class="s1">&#39;Blowing Sand&#39;</span><span class="p">,</span> <span class="s1">&#39;Heavy Rain Shower&#39;</span><span class="p">,</span> <span class="s1">&#39;Drifting Snow&#39;</span><span class="p">,</span> <span class="s1">&#39;Heavy Thunderstorms with Small Hail&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Snowy&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Light Snow&#39;</span><span class="p">,</span> <span class="s1">&#39;Snow&#39;</span><span class="p">,</span> <span class="s1">&#39;Light Snow / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Snow Grains&#39;</span><span class="p">,</span> <span class="s1">&#39;Snow Showers&#39;</span><span class="p">,</span> <span class="s1">&#39;Snow / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Light Snow and Sleet&#39;</span><span class="p">,</span> <span class="s1">&#39;Snow and Sleet&#39;</span><span class="p">,</span> <span class="s1">&#39;Light Snow and Sleet / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Snow and Sleet / Windy&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Windy&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Blowing Dust / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Fair / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Mostly Cloudy / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Light Rain / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;T-Storm / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Blowing Snow / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Freezing Rain / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Light Snow and Sleet / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Sleet and Thunder / Windy&#39;</span><span class="p">,</span> <span class="s1">&#39;Blowing Snow Nearby&#39;</span><span class="p">,</span> <span class="s1">&#39;Heavy Rain Shower / Windy&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Hail&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Hail&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Volcanic Ash&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Volcanic Ash&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Tornado&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Tornado&#39;</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">map_weather_to_bins</span><span class="p">(</span><span class="n">weather</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">bin_name</span><span class="p">,</span> <span class="n">bin_values</span> <span class="ow">in</span> <span class="n">weather_bins</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">weather</span> <span class="ow">in</span> <span class="n">bin_values</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">bin_name</span>
+    <span class="k">return</span> <span class="s1">&#39;Other&#39;</span> 
+
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;weather_condition&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;weather_condition&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">map_weather_to_bins</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;weather_condition&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>175167      Clear
+175168      Clear
+175169      Clear
+175170      Clear
+175171      Clear
+            ...  
+1110849     Clear
+1110850     Clear
+1110851     Clear
+1110852    Cloudy
+1110853    Cloudy
+Name: weather_condition, Length: 316562, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;weather_condition&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;Clear&#39;, &#39;Other&#39;, &#39;Cloudy&#39;, &#39;Rainy&#39;, nan, &#39;Windy&#39;, &#39;Snowy&#39;, &#39;Hail&#39;],
+      dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Se eliminan los nan</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;weather_condition&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Se removeran las siguientes columnas:</p>
+<ul class="simple">
+<li><p>Descripcion, ya que no es de relevancia para el modelo conocer textualmente que ocurrió en el accidente.</p></li>
+<li><p>Street, City, County, Zipcode ya que se analizarán son los accidentes por estado.</p></li>
+<li><p>Timezone debido a que se cuentan con las horas donde ocurrieron los accidentes.</p></li>
+<li><p>Airport code, por el contexto no es relevante.</p></li>
+<li><p>Weather timestamp debido a que se ya se cuentan con variables numericas relacionadas al clima.</p></li>
+<li><p>Wind direction debido a que se ya se cuentan con variables numericas relacionadas al clima</p></li>
+<li><p>Weather_condition debido a que se ya se cuentan con variables numericas relacionadas al clima</p></li>
+<li><p>Nautical_twilight debido a que se cuentan con las horas donde ocurrieron los accidentes.</p></li>
+<li><p>Astronomical_twilight debido a que se cuentan con las horas donde ocurrieron los accidentes.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;description&#39;</span><span class="p">,</span> <span class="s1">&#39;street&#39;</span><span class="p">,</span> <span class="s1">&#39;city&#39;</span><span class="p">,</span> <span class="s1">&#39;county&#39;</span><span class="p">,</span> 
+       <span class="s1">&#39;zipcode&#39;</span><span class="p">,</span> <span class="s1">&#39;timezone&#39;</span><span class="p">,</span> <span class="s1">&#39;airport_code&#39;</span><span class="p">,</span> <span class="s1">&#39;weather_timestamp&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;wind_direction&#39;</span><span class="p">,</span> <span class="s1">&#39;sunrise_sunset&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;civil_twilight&#39;</span><span class="p">,</span> <span class="s1">&#39;nautical_twilight&#39;</span><span class="p">,</span> <span class="s1">&#39;astronomical_twilight&#39;</span><span class="p">,</span><span class="s1">&#39;end_lat&#39;</span><span class="p">,</span><span class="s1">&#39;end_lng&#39;</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="valores-faltantes">
+<h3>Valores faltantes<a class="headerlink" href="#valores-faltantes" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)))</span><span class="o">*</span><span class="mi">100</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>severity             0.000000
+start_lat            0.000000
+start_lng            0.000000
+distance_mi          0.000000
+temperature_f        0.361396
+humidity_percent     0.463312
+visibility_mi        0.288923
+precipitation_in     5.286674
+weather_condition    0.000000
+bump                 0.000000
+crossing             0.000000
+give_way             0.000000
+junction             0.000000
+no_exit              0.000000
+stop                 0.000000
+traffic_calming      0.000000
+traffic_signal       0.000000
+Year                 0.000000
+Month                0.000000
+Day                  0.000000
+Hour                 0.000000
+Weekday              0.000000
+Duracion(min)        0.000000
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Se procede a imputar valores faltntes con la mediana de cada caracteristicas al ser datos sesgados</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.impute</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimpleImputer</span>
+<span class="n">numeric_cols</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span>
+<span class="n">non_numeric_cols</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span>
+<span class="n">df_copy</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">imputer</span> <span class="o">=</span> <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;median&#39;</span><span class="p">)</span>
+<span class="n">df_copy</span><span class="p">[</span><span class="n">numeric_cols</span><span class="p">]</span> <span class="o">=</span> <span class="n">imputer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">numeric_cols</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_copy</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>severity             0
+start_lat            0
+start_lng            0
+distance_mi          0
+temperature_f        0
+humidity_percent     0
+visibility_mi        0
+precipitation_in     0
+weather_condition    0
+bump                 0
+crossing             0
+give_way             0
+junction             0
+no_exit              0
+stop                 0
+traffic_calming      0
+traffic_signal       0
+Year                 0
+Month                0
+Day                  0
+Hour                 0
+Weekday              0
+Duracion(min)        0
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df_copy</span>
+<span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+Index: 309079 entries, 175167 to 1110853
+Data columns (total 23 columns):
+ #   Column             Non-Null Count   Dtype  
+---  ------             --------------   -----  
+ 0   severity           309079 non-null  float64
+ 1   start_lat          309079 non-null  float64
+ 2   start_lng          309079 non-null  float64
+ 3   distance_mi        309079 non-null  float64
+ 4   temperature_f      309079 non-null  float64
+ 5   humidity_percent   309079 non-null  float64
+ 6   visibility_mi      309079 non-null  float64
+ 7   precipitation_in   309079 non-null  float64
+ 8   weather_condition  309079 non-null  object 
+ 9   bump               309079 non-null  float64
+ 10  crossing           309079 non-null  float64
+ 11  give_way           309079 non-null  float64
+ 12  junction           309079 non-null  float64
+ 13  no_exit            309079 non-null  float64
+ 14  stop               309079 non-null  float64
+ 15  traffic_calming    309079 non-null  float64
+ 16  traffic_signal     309079 non-null  float64
+ 17  Year               309079 non-null  float64
+ 18  Month              309079 non-null  float64
+ 19  Day                309079 non-null  float64
+ 20  Hour               309079 non-null  float64
+ 21  Weekday            309079 non-null  float64
+ 22  Duracion(min)      309079 non-null  float64
+dtypes: float64(22), object(1)
+memory usage: 56.6+ MB
+</pre></div>
+</div>
+</div>
+</div>
+<p>Se utilizará el método VIF (Variance Inflation Factor), métrica utilizada para identificar la multicolinealidad en un conjunto de datos. Por encima de 5-10 sugiere que hay multicolinealidad alta entre la variable y al menos una otra variable.</p>
+<p>VIF = 1/(1-R^2)</p>
+<p>Donde ( R^2 ) es el coeficiente de determinación obtenido al regresar una variable independiente contra todas las demás variables independientes en el modelo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numeric_cols</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.stats.outliers_influence</span><span class="w"> </span><span class="kn">import</span> <span class="n">variance_inflation_factor</span>
+
+
+<span class="n">df_new</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">numeric_cols</span><span class="p">]</span>
+<span class="n">df_new</span><span class="o">=</span> <span class="n">df_new</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;severity&quot;</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># Handle NaN, inf, and -inf values</span>
+<span class="n">df_new</span> <span class="o">=</span> <span class="n">df_new</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+<span class="c1"># Calculate VIF</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df_new</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">const</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">vif_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">vif_data</span><span class="p">[</span><span class="s2">&quot;feature&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_new</span><span class="o">.</span><span class="n">columns</span>
+<span class="n">vif_data</span><span class="p">[</span><span class="s2">&quot;VIF&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">variance_inflation_factor</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">df_new</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+
+<span class="c1"># Exclude the constant column when displaying VIF values</span>
+<span class="n">vif_data</span> <span class="o">=</span> <span class="n">vif_data</span><span class="p">[</span><span class="n">vif_data</span><span class="p">[</span><span class="s2">&quot;feature&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;const&quot;</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">vif_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>             feature       VIF
+0          start_lat  7.341919
+1          start_lng  7.349662
+2        distance_mi  1.032213
+3      temperature_f  2.126720
+4   humidity_percent  2.202822
+5      visibility_mi  1.257015
+6   precipitation_in  1.110307
+7               bump  3.566807
+8           crossing  1.283573
+9           give_way  1.007159
+10          junction  1.014160
+11           no_exit  1.001300
+12              stop  1.051652
+13   traffic_calming  3.575233
+14    traffic_signal  1.243600
+15              Year  1.443907
+16             Month  1.450355
+17               Day  1.016676
+18              Hour  1.094453
+19           Weekday  1.004774
+20     Duracion(min)  1.001539
+</pre></div>
+</div>
+</div>
+</div>
+<p>Se elimina la columna start_lat, y se calcula nuevamente el VIF. Si ninguna de las variables tiene un VIF superior a 5 no se realizan más eliminaciones.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;start_lat&quot;</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corr_matrix</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">font_scale</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">triu</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">corr_matrix</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">))</span>   
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">corr_matrix</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">,</span> <span class="n">cbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.1f&#39;</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">annot_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="mi">15</span><span class="p">},</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;coolwarm&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/8f07d0fdd4da172d32c98a7401e27caff45903fbe1b102813c9956b30a7bd544.png" src="_images/8f07d0fdd4da172d32c98a7401e27caff45903fbe1b102813c9956b30a7bd544.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Se</span> <span class="n">elimina</span> <span class="n">la</span> <span class="n">columna</span> <span class="n">de</span> <span class="n">traffic</span> <span class="n">calming</span> <span class="n">porque</span> <span class="n">es</span> <span class="n">explicada</span> <span class="n">por</span> <span class="n">la</span> <span class="n">columna</span> <span class="n">bump</span><span class="p">,</span> <span class="n">ambas</span> <span class="n">variables</span> <span class="n">hacen</span> <span class="n">referencia</span> <span class="n">a</span> <span class="n">reductores</span> <span class="n">de</span> <span class="n">velocidad</span><span class="o">.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;traffic_calming&quot;</span><span class="p">],</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>severity</th>
+      <td>309079.0</td>
+      <td>2.0</td>
+      <td>0.3</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>2.0</td>
+      <td>2.0</td>
+      <td>4.0</td>
+    </tr>
+    <tr>
+      <th>start_lng</th>
+      <td>309079.0</td>
+      <td>-119.5</td>
+      <td>1.9</td>
+      <td>-124.4</td>
+      <td>-121.4</td>
+      <td>-118.5</td>
+      <td>-117.9</td>
+      <td>-114.2</td>
+    </tr>
+    <tr>
+      <th>distance_mi</th>
+      <td>309079.0</td>
+      <td>1.0</td>
+      <td>2.1</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.3</td>
+      <td>1.0</td>
+      <td>50.5</td>
+    </tr>
+    <tr>
+      <th>temperature_f</th>
+      <td>309079.0</td>
+      <td>63.4</td>
+      <td>14.5</td>
+      <td>-8.0</td>
+      <td>54.0</td>
+      <td>62.0</td>
+      <td>72.0</td>
+      <td>207.0</td>
+    </tr>
+    <tr>
+      <th>humidity_percent</th>
+      <td>309079.0</td>
+      <td>56.5</td>
+      <td>24.9</td>
+      <td>2.0</td>
+      <td>36.0</td>
+      <td>58.0</td>
+      <td>77.0</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>visibility_mi</th>
+      <td>309079.0</td>
+      <td>9.2</td>
+      <td>2.4</td>
+      <td>0.0</td>
+      <td>10.0</td>
+      <td>10.0</td>
+      <td>10.0</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>precipitation_in</th>
+      <td>309079.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2.1</td>
+    </tr>
+    <tr>
+      <th>bump</th>
+      <td>309079.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>crossing</th>
+      <td>309079.0</td>
+      <td>0.1</td>
+      <td>0.2</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>give_way</th>
+      <td>309079.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>junction</th>
+      <td>309079.0</td>
+      <td>0.1</td>
+      <td>0.3</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>no_exit</th>
+      <td>309079.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>stop</th>
+      <td>309079.0</td>
+      <td>0.0</td>
+      <td>0.2</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>traffic_signal</th>
+      <td>309079.0</td>
+      <td>0.1</td>
+      <td>0.2</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>Year</th>
+      <td>309079.0</td>
+      <td>2022.2</td>
+      <td>0.4</td>
+      <td>2022.0</td>
+      <td>2022.0</td>
+      <td>2022.0</td>
+      <td>2022.0</td>
+      <td>2023.0</td>
+    </tr>
+    <tr>
+      <th>Month</th>
+      <td>309079.0</td>
+      <td>5.6</td>
+      <td>3.6</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>5.0</td>
+      <td>9.0</td>
+      <td>12.0</td>
+    </tr>
+    <tr>
+      <th>Day</th>
+      <td>309079.0</td>
+      <td>15.7</td>
+      <td>8.7</td>
+      <td>1.0</td>
+      <td>8.0</td>
+      <td>16.0</td>
+      <td>23.0</td>
+      <td>31.0</td>
+    </tr>
+    <tr>
+      <th>Hour</th>
+      <td>309079.0</td>
+      <td>12.6</td>
+      <td>5.5</td>
+      <td>0.0</td>
+      <td>8.0</td>
+      <td>13.0</td>
+      <td>17.0</td>
+      <td>23.0</td>
+    </tr>
+    <tr>
+      <th>Weekday</th>
+      <td>309079.0</td>
+      <td>2.8</td>
+      <td>1.9</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>3.0</td>
+      <td>4.0</td>
+      <td>6.0</td>
+    </tr>
+    <tr>
+      <th>Duracion(min)</th>
+      <td>309079.0</td>
+      <td>127.2</td>
+      <td>1134.2</td>
+      <td>4.0</td>
+      <td>70.0</td>
+      <td>95.0</td>
+      <td>134.0</td>
+      <td>379558.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<ul class="simple">
+<li><p><strong>Severity</strong>:
+La mayoría de los accidentes tienen una gravedad de 2, ya que el 50% (mediana) de los datos presentan este valor.
+La gravedad varía entre 1 y 4, siendo 4 la máxima gravedad registrada.
+La desviación estándar es baja (0.2), lo que indica que la mayoría de los accidentes están cerca de la gravedad promedio.</p></li>
+<li><p><strong>Distancia</strong>:
+En promedio, la distancia afectada por el accidente es de 1.0 milla, pero hay accidentes que afectan hasta 52.6 millas.</p></li>
+<li><p><strong>Condiciones climáticas</strong>:
+La temperatura promedio durante los accidentes es de 63.3°F, con un mínimo de -8.0°F y un máximo sorprendentemente alto de 207.0°F (esto podría ser un error o valor atípico).
+La humedad promedio es del 56.6%.
+La visibilidad es en promedio de 9.2 millas, con la mayoría de los accidentes teniendo una visibilidad de 10 millas.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;severity&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Categoria de severidad&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Cantidad por categoria&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">annotate_counts</span><span class="p">(</span><span class="n">ax</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">patches</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">get_height</span><span class="p">())</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span> <span class="o">+</span> <span class="n">p</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">get_height</span><span class="p">()),</span> 
+                    <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> 
+                    <span class="n">textcoords</span><span class="o">=</span><span class="s1">&#39;offset points&#39;</span><span class="p">)</span>
+<span class="n">annotate_counts</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/dc14ec7acdf711bce6fa739263730c516fb03dd16456b62031f3c86e76b04286.png" src="_images/dc14ec7acdf711bce6fa739263730c516fb03dd16456b62031f3c86e76b04286.png" />
+</div>
+</div>
+<p>Se observa que los datos se encuentran desbalanceados, siendo la mayor frecuencia accidentes de severidad 2. Lo anterior tiene sentido, puesto que los accidentes usualmente no son fatales.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
+
+<span class="c1"># Ajustar espacio entre subplots</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+
+<span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;Month&#39;</span><span class="p">,</span> <span class="s1">&#39;Day&#39;</span><span class="p">,</span> <span class="s2">&quot;Hour&quot;</span><span class="p">]</span>
+
+<span class="c1"># Crear gráficos de barras apiladas por severity</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">column</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">columns</span><span class="p">):</span>
+    <span class="n">row</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># Obtener índices de fila y columna</span>
+    <span class="n">pivot_data</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="n">column</span><span class="p">,</span> <span class="s1">&#39;severity&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">pivot_data</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">stacked</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">],</span> <span class="n">colormap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Título y etiquetas</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Distribución de </span><span class="si">{</span><span class="n">column</span><span class="si">}</span><span class="s1"> por Severity&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Frecuencia&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+    
+    <span class="c1"># Rotar etiquetas del eje x</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+    
+    <span class="c1"># Mover leyenda</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Severity&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Mostrar gráficos</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/89c42e7c31bed7ab72ec8a333e2bf31e533160d3dd67cce343143eab1a54a60b.png" src="_images/89c42e7c31bed7ab72ec8a333e2bf31e533160d3dd67cce343143eab1a54a60b.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Se evidencia que los meses con mayor frecuencia de accidentes son de severidad 2.</p></li>
+<li><p>Los meses con mayor frecuencia de accidentes son enero, febrero y marzo.</p></li>
+<li><p>El día con mayor incidentes es el 14 del mes según lo observado.</p></li>
+<li><p>El rango de horas con mayor accidentalidad es de 14:00 - 17:00 donde usualmente salen de la jornada laboral.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cat_cols</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;object&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span>
+<span class="n">num_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;distance_mi&quot;</span><span class="p">,</span> <span class="s2">&quot;temperature_f&quot;</span><span class="p">,</span> <span class="s2">&quot;humidity_percent&quot;</span><span class="p">,</span> <span class="s2">&quot;precipitation_in&quot;</span><span class="p">,</span> <span class="s2">&quot;Duracion(min)&quot;</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">font_scale</span><span class="o">=</span><span class="mf">1.4</span><span class="p">)</span>
+
+<span class="c1"># Iterar sobre cada columna numérica</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">num_cols</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>  <span class="c1"># Sólo mostramos los primeros 4 gráficos en la cuadrícula 2x2</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">idx</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">idx</span><span class="o">%</span><span class="k">2</span>]  # Asignar los ejes adecuados
+        <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">],</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Boxplot de </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>  <span class="c1"># Ajustar el layout para que no haya superposición</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/d9aafb2768d9ea6c3bf311e67a424a8988a135c3bbba0b331c0c2b0ff6ffda2e.png" src="_images/d9aafb2768d9ea6c3bf311e67a424a8988a135c3bbba0b331c0c2b0ff6ffda2e.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>La distancia presenta muchos valores atípicos probablemente debido a posibles errores en la toma de datos, generalmente esta distancia toma valores pequeños.</p></li>
+<li><p>Las precipitaciones en el estado de California no son muy comunes.</p></li>
+</ul>
+</section>
+<section id="one-hot-encoding">
+<h3>One Hot Encoding<a class="headerlink" href="#one-hot-encoding" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">OneHotEncoder</span>
+
+<span class="n">encoder</span> <span class="o">=</span> <span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">sparse_output</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">state_encoded</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;weather_condition&#39;</span><span class="p">]])</span>
+<span class="n">encoded_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">state_encoded</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">encoder</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">([</span><span class="s1">&#39;weather_condition&#39;</span><span class="p">]))</span>
+
+<span class="c1"># Resetting the index before concatenation</span>
+<span class="n">df_dropped</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;weather_condition&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df_encoded</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_dropped</span><span class="p">,</span> <span class="n">encoded_df</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_encoded</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(309079, 27)
+</pre></div>
+</div>
+</div>
+</div>
+<section id="smote">
+<h4>SMOTE<a class="headerlink" href="#smote" title="Link to this heading">#</a></h4>
+<p>Es importante resaltar que el SMOTE se debe aplicar únicamente al conjunto de entrenamiento para evitar la fuga de datos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="c1">#Se define X y y</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">df_encoded</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;severity&#39;</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df_encoded</span><span class="p">[</span><span class="s1">&#39;severity&#39;</span><span class="p">]</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">imblearn.over_sampling</span><span class="w"> </span><span class="kn">import</span> <span class="n">SMOTE</span>
+
+<span class="n">smote</span> <span class="o">=</span> <span class="n">SMOTE</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">X_sampled</span><span class="p">,</span> <span class="n">y_sampled</span> <span class="o">=</span> <span class="n">smote</span><span class="o">.</span><span class="n">fit_resample</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">resample</span>
+
+<span class="n">sample_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.01</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_sampled</span><span class="p">))</span> 
+<span class="n">X_sampled</span><span class="p">,</span> <span class="n">y_sampled</span> <span class="o">=</span> <span class="n">resample</span><span class="p">(</span><span class="n">X_sampled</span><span class="p">,</span> <span class="n">y_sampled</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="n">sample_size</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y_sampled</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_sampled</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(8717, 26)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen">Resumen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodologia">Metodología</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#poblacion">Población:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#muestra">Muestra:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#justificacion-de-la-seleccion-de-la-muestra">Justificación de la Selección de la Muestra:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-de-machine-learning">Modelos de machine learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-metodos-de-conjunto">Ensemble (Métodos de conjunto):</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-regresion-logistica">1) Modelo de Regresión Logística:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arbol-de-decision">2) Árbol de Decisión:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maquina-de-soporte-vectorial-svm">3) Máquina de Soporte Vectorial (SVM):</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#voting-classifier">4) Voting Classifier:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diseno-general-tipo-de-estudio">Diseño general (Tipo de estudio)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#caracteristicas-del-diseno">Características del Diseño:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diccionario-de-variables">Diccionario de variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#valores-faltantes">Valores faltantes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-hot-encoding">One Hot Encoding</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#smote">SMOTE</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jose Montalvo Pajaro
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
