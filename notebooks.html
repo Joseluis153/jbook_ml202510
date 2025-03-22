@@ -61,6 +61,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Notebooks with MyST Markdown" href="markdown-notebooks.html" />
+    <link rel="prev" title="Welcome to your Jupyter Book" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -380,25 +381,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodologia">Metodología</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#poblacion">Población:</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#muestra">Muestra:</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#justificacion-de-la-seleccion-de-la-muestra">Justificación de la Selección de la Muestra:</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-de-machine-learning">Modelos de machine learning</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-metodos-de-conjunto">Ensemble (Métodos de conjunto):</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-regresion-logistica">1) Modelo de Regresión Logística:</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arbol-de-decision">2) Árbol de Decisión:</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maquina-de-soporte-vectorial-svm">3) Máquina de Soporte Vectorial (SVM):</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#voting-classifier">4) Voting Classifier:</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diseno-general-tipo-de-estudio">Diseño general (Tipo de estudio)</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#caracteristicas-del-diseno">Características del Diseño:</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diccionario-de-variables">Diccionario de variables</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#valores-faltantes">Valores faltantes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-hot-encoding">One Hot Encoding</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#smote">SMOTE</a></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -429,77 +415,6 @@ A través de la integración de varios modelos predictivos mediante un Voting Cl
 <h3>Muestra:<a class="headerlink" href="#muestra" title="Link to this heading">#</a></h3>
 <p>Para los propósitos de este estudio, hemos restringido nuestro análisis a una muestra específica. Esta muestra consiste en accidentes vehiculares que se han registrado en el estado de California a partir del año 2022.</p>
 </section>
-<section id="justificacion-de-la-seleccion-de-la-muestra">
-<h3>Justificación de la Selección de la Muestra:<a class="headerlink" href="#justificacion-de-la-seleccion-de-la-muestra" title="Link to this heading">#</a></h3>
-<p>La elección de centrarse en el estado de California se debe a que este es el estado ccon mayor frecuencia de accidentes, adicionalmente, con el objetivo de disminuir el tiempo de computación. El año 2022 fue seleccionado debido a que se busca reducir el tiempo de ejecución de modelo debido a limitaciones de la capacidad computacional del equipo con el que se trabaja.</p>
-<ol class="arabic simple">
-<li><p>Recopilación de Datos:</p></li>
-</ol>
-<p>Se recopilaron datos relevantes relacionados con accidentes de tráfico en Estados Unidos, incluyendo variables como condiciones climáticas, ubicación, hora del día, entre otras.</p>
-<ol class="arabic simple" start="2">
-<li><p>Preprocesamiento de Datos:</p></li>
-</ol>
-<ul class="simple">
-<li><p>Limpieza: Eliminación de valores nulos o imputación donde sea necesario.</p></li>
-<li><p>Codificación: Conversión de variables categóricas a numéricas.</p></li>
-<li><p>Escalado: Utilización de StandardScaler para normalizar las características.</p></li>
-</ul>
-<ol class="arabic simple" start="3">
-<li><p>Equilibrio de Clases:</p></li>
-</ol>
-<p>Dado el desequilibrio potencial en las clases (más accidentes con severidades menores que mayores), se utilizó la técnica SMOTE para equilibrar las clases en el conjunto de entrenamiento.</p>
-<ol class="arabic simple" start="4">
-<li><p>Construcción del Voting Classifier:</p></li>
-</ol>
-<ul class="simple">
-<li><p>Se seleccionaron tres modelos base de clasificación: Logistic Regression, Decision Tree y Support Vector Machine.</p></li>
-<li><p>Cada modelo se optimizó individualmente utilizando validación cruzada y búsqueda de cuadrícula para hiperparámetros.</p></li>
-<li><p>Los modelos optimizados se integraron utilizando VotingClassifier con votación ‘soft’ para combinar las probabilidades.</p></li>
-</ul>
-<ol class="arabic simple" start="5">
-<li><p>Evaluación del Modelo:</p></li>
-</ol>
-<p>Se utilizó un conjunto de datos de prueba separado para evaluar el rendimiento del Voting Classifier.
-Las métricas de rendimiento incluyeron precisión, recall, F1-score y AUC-ROC.</p>
-</section>
-</section>
-<section id="modelos-de-machine-learning">
-<h2>Modelos de machine learning<a class="headerlink" href="#modelos-de-machine-learning" title="Link to this heading">#</a></h2>
-<section id="ensemble-metodos-de-conjunto">
-<h3>Ensemble (Métodos de conjunto):<a class="headerlink" href="#ensemble-metodos-de-conjunto" title="Link to this heading">#</a></h3>
-<p>Un ensemble, o método de conjunto, es una técnica en el aprendizaje automático que combina las predicciones de varios modelos con el objetivo de mejorar la robustez, precisión y reducir el error en las predicciones. La idea fundamental detrás de los ensambles es que múltiples modelos débiles pueden combinarse para formar un modelo fuerte y preciso. Los métodos de ensamble son especialmente efectivos para reducir el error debido al sesgo y la varianza, lo que lleva a mejores generalizaciones en datos no vistos.</p>
-</section>
-<section id="modelo-de-regresion-logistica">
-<h3>1) Modelo de Regresión Logística:<a class="headerlink" href="#modelo-de-regresion-logistica" title="Link to this heading">#</a></h3>
-<p>La Regresión Logística es un modelo estadístico que permite estimar la probabilidad de una variable categórica binaria en función de una o más variables predictoras. Es una extensión del modelo de regresión lineal adaptado a las predicciones de probabilidad. En casos de múltiples clases, la Regresión Logística se configura para estimar probabilidades para cada clase individual y luego seleccionar la clase con la mayor probabilidad (One vs Rest). Se utiliza el solver ‘saga’, una variante del método de descenso de gradiente, adecuado para conjuntos de datos de gran tamaño. Este solver se configura con una estrategia multinomial para manejar múltiples clases y utiliza la regularización L2 para evitar el sobreajuste penalizando los coeficientes más grandes.</p>
-</section>
-<section id="arbol-de-decision">
-<h3>2) Árbol de Decisión:<a class="headerlink" href="#arbol-de-decision" title="Link to this heading">#</a></h3>
-<p>Un Árbol de Decisión es un modelo gráfico que representa decisiones y sus posibles resultados en forma de un árbol. Es útil para problemas de clasificación y regresión. El árbol toma decisiones dividiendo el conjunto de datos en subconjuntos basados en condiciones sobre las características. Estas divisiones se realizan de manera que cada subconjunto se acerque lo más posible a tener etiquetas de una sola clase. Se establece una profundidad máxima para el árbol para garantizar que el modelo no sea demasiado complejo y evite el sobreajuste.</p>
-</section>
-<section id="maquina-de-soporte-vectorial-svm">
-<h3>3) Máquina de Soporte Vectorial (SVM):<a class="headerlink" href="#maquina-de-soporte-vectorial-svm" title="Link to this heading">#</a></h3>
-<p>Una SVM es un conjunto de métodos supervisados de aprendizaje utilizados para clasificación y regresión. Busca encontrar el hiperplano que mejor separa las clases en el espacio de características. El “mejor” hiperplano es aquel que maximiza el margen entre las dos clases. Las SVM son especialmente útiles cuando las clases no son linealmente separables. El kernel RBF (Radial Basis Function) permite a la SVM manejar relaciones no lineales al mapear los datos a un espacio de características de mayor dimensión. El parámetro de regularización C determina el compromiso entre maximizar el margen y minimizar la clasificación errónea.</p>
-</section>
-<section id="voting-classifier">
-<h3>4) Voting Classifier:<a class="headerlink" href="#voting-classifier" title="Link to this heading">#</a></h3>
-<p>Un Voting Classifier es una técnica de ensamblado que combina predicciones de múltiples modelos de aprendizaje automático para mejorar la robustez y la precisión de las predicciones. Funciona haciendo que cada modelo individual en el ensamblado “vote” por una clase, y luego la clase que recibe la mayoría de los votos es la clase predicha por el ensamblado completo. En este estudio, el Voting Classifier se compone de los tres modelos mencionados anteriormente.</p>
-</section>
-<section id="diseno-general-tipo-de-estudio">
-<h3>Diseño general (Tipo de estudio)<a class="headerlink" href="#diseno-general-tipo-de-estudio" title="Link to this heading">#</a></h3>
-<p>Este trabajo presenta un estudio predictivo basado en técnicas de aprendizaje automático. El objetivo principal es predecir la severidad de los accidentes en California durante el año 2022. Se hace uso de un conjunto de datos históricos desde 2016, con el propósito de entrenar y validar diferentes modelos de machine learning y, posteriormente, ensamblarlos para una predicción más robusta.</p>
-</section>
-</section>
-<section id="caracteristicas-del-diseno">
-<h2>Características del Diseño:<a class="headerlink" href="#caracteristicas-del-diseno" title="Link to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p>Datos Históricos: Se utiliza un conjunto de datos de accidentes en Estados Unidos desde 2016. Sin embargo, el estudio se centra en el estado de California y en el año 2022 para hacer predicciones más precisas y contextualizadas.</p></li>
-<li><p>Enfoque de Muestreo: Se realiza una selección temporal y espacial, enfocándose en el año 2022 y en el estado de California. Esto garantiza que el estudio sea relevante y aplicable a la región y periodo de interés.</p></li>
-<li><p>Preprocesamiento: Antes de entrenar los modelos, se realiza un preprocesamiento de los datos, que incluye técnicas como la codificación de variables categóricas, la normalización de características y el manejo de desequilibrios de clases mediante la técnica SMOTE.</p></li>
-<li><p>Modelado: Se emplean tres modelos diferentes de aprendizaje automático: Regresión Logística, Árbol de Decisión y Máquina de Soporte Vectorial (SVM). Luego, estos modelos son ensamblados mediante un Voting Classifier para realizar predicciones combinadas.</p></li>
-<li><p>Validación: El rendimiento de los modelos se valida mediante técnicas como la división de datos en conjuntos de entrenamiento y prueba, y la evaluación de métricas de rendimiento como precisión, recall y F1-score.</p></li>
-</ol>
-<p>El diseño de este estudio se orienta hacia una metodología cuantitativa, utilizando técnicas de machine learning para desarrollar un modelo predictivo robusto y confiable que pueda ser utilizado en aplicaciones prácticas, como la planificación urbana o la gestión de la seguridad vial.</p>
 </section>
 <section id="diccionario-de-variables">
 <h2>Diccionario de variables<a class="headerlink" href="#diccionario-de-variables" title="Link to this heading">#</a></h2>
@@ -626,11 +541,10 @@ Las métricas de rendimiento incluyeron precisión, recall, F1-score y AUC-ROC.<
 <span class="g g-Whitespace">   </span><span class="mi">2213</span> <span class="k">if</span> <span class="n">is_dtlike</span><span class="p">:</span>
 <span class="g g-Whitespace">   </span><span class="mi">2214</span>     <span class="n">values</span> <span class="o">=</span> <span class="n">ensure_wrapped_if_datetimelike</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
 
-<span class="nn">File c:\Users\jose_\anaconda3\envs\ml_venl\lib\site-packages\pandas\core\internals\managers.py:2253,</span> in <span class="ni">_stack_arrays</span><span class="nt">(tuples, dtype)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2250</span> <span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arrays</span><span class="p">),)</span> <span class="o">+</span> <span class="n">first</span><span class="o">.</span><span class="n">shape</span>
+<span class="nn">File c:\Users\jose_\anaconda3\envs\ml_venl\lib\site-packages\pandas\core\internals\managers.py:2254,</span> in <span class="ni">_stack_arrays</span><span class="nt">(tuples, dtype)</span>
 <span class="g g-Whitespace">   </span><span class="mi">2252</span> <span class="n">stacked</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">2253</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">arr</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">arrays</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">2254</span>     <span class="n">stacked</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr</span>
+<span class="g g-Whitespace">   </span><span class="mi">2253</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">arr</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">arrays</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">2254</span>     <span class="n">stacked</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr</span>
 <span class="g g-Whitespace">   </span><span class="mi">2256</span> <span class="k">return</span> <span class="n">stacked</span><span class="p">,</span> <span class="n">placement</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
@@ -1770,112 +1684,6 @@ La visibilidad es en promedio de 9.2 millas, con la mayoría de los accidentes t
 <li><p>El día con mayor incidentes es el 14 del mes según lo observado.</p></li>
 <li><p>El rango de horas con mayor accidentalidad es de 14:00 - 17:00 donde usualmente salen de la jornada laboral.</p></li>
 </ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cat_cols</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;object&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span>
-<span class="n">num_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;distance_mi&quot;</span><span class="p">,</span> <span class="s2">&quot;temperature_f&quot;</span><span class="p">,</span> <span class="s2">&quot;humidity_percent&quot;</span><span class="p">,</span> <span class="s2">&quot;precipitation_in&quot;</span><span class="p">,</span> <span class="s2">&quot;Duracion(min)&quot;</span><span class="p">]</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">font_scale</span><span class="o">=</span><span class="mf">1.4</span><span class="p">)</span>
-
-<span class="c1"># Iterar sobre cada columna numérica</span>
-<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">num_cols</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>  <span class="c1"># Sólo mostramos los primeros 4 gráficos en la cuadrícula 2x2</span>
-        <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">idx</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">idx</span><span class="o">%</span><span class="k">2</span>]  # Asignar los ejes adecuados
-        <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">],</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Boxplot de </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>  <span class="c1"># Ajustar el layout para que no haya superposición</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/d9aafb2768d9ea6c3bf311e67a424a8988a135c3bbba0b331c0c2b0ff6ffda2e.png" src="_images/d9aafb2768d9ea6c3bf311e67a424a8988a135c3bbba0b331c0c2b0ff6ffda2e.png" />
-</div>
-</div>
-<ul class="simple">
-<li><p>La distancia presenta muchos valores atípicos probablemente debido a posibles errores en la toma de datos, generalmente esta distancia toma valores pequeños.</p></li>
-<li><p>Las precipitaciones en el estado de California no son muy comunes.</p></li>
-</ul>
-</section>
-<section id="one-hot-encoding">
-<h3>One Hot Encoding<a class="headerlink" href="#one-hot-encoding" title="Link to this heading">#</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">OneHotEncoder</span>
-
-<span class="n">encoder</span> <span class="o">=</span> <span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">sparse_output</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-<span class="n">state_encoded</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;weather_condition&#39;</span><span class="p">]])</span>
-<span class="n">encoded_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">state_encoded</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">encoder</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">([</span><span class="s1">&#39;weather_condition&#39;</span><span class="p">]))</span>
-
-<span class="c1"># Resetting the index before concatenation</span>
-<span class="n">df_dropped</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;weather_condition&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">df_encoded</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_dropped</span><span class="p">,</span> <span class="n">encoded_df</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_encoded</span><span class="o">.</span><span class="n">shape</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(309079, 27)
-</pre></div>
-</div>
-</div>
-</div>
-<section id="smote">
-<h4>SMOTE<a class="headerlink" href="#smote" title="Link to this heading">#</a></h4>
-<p>Es importante resaltar que el SMOTE se debe aplicar únicamente al conjunto de entrenamiento para evitar la fuga de datos.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
-<span class="c1">#Se define X y y</span>
-
-<span class="n">X</span> <span class="o">=</span> <span class="n">df_encoded</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;severity&#39;</span><span class="p">])</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">df_encoded</span><span class="p">[</span><span class="s1">&#39;severity&#39;</span><span class="p">]</span>
-<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">imblearn.over_sampling</span><span class="w"> </span><span class="kn">import</span> <span class="n">SMOTE</span>
-
-<span class="n">smote</span> <span class="o">=</span> <span class="n">SMOTE</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">X_sampled</span><span class="p">,</span> <span class="n">y_sampled</span> <span class="o">=</span> <span class="n">smote</span><span class="o">.</span><span class="n">fit_resample</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">resample</span>
-
-<span class="n">sample_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.01</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_sampled</span><span class="p">))</span> 
-<span class="n">X_sampled</span><span class="p">,</span> <span class="n">y_sampled</span> <span class="o">=</span> <span class="n">resample</span><span class="p">(</span><span class="n">X_sampled</span><span class="p">,</span> <span class="n">y_sampled</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="n">sample_size</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y_sampled</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_sampled</span><span class="o">.</span><span class="n">shape</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(8717, 26)
-</pre></div>
-</div>
-</div>
-</div>
-</section>
 </section>
 </section>
 </section>
@@ -1910,6 +1718,15 @@ La visibilidad es en promedio de 9.2 millas, con la mayoría de los accidentes t
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Welcome to your Jupyter Book</p>
+      </div>
+    </a>
     <a class="right-next"
        href="markdown-notebooks.html"
        title="next page">
@@ -1939,25 +1756,10 @@ La visibilidad es en promedio de 9.2 millas, con la mayoría de los accidentes t
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodologia">Metodología</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#poblacion">Población:</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#muestra">Muestra:</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#justificacion-de-la-seleccion-de-la-muestra">Justificación de la Selección de la Muestra:</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-de-machine-learning">Modelos de machine learning</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-metodos-de-conjunto">Ensemble (Métodos de conjunto):</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-regresion-logistica">1) Modelo de Regresión Logística:</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arbol-de-decision">2) Árbol de Decisión:</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maquina-de-soporte-vectorial-svm">3) Máquina de Soporte Vectorial (SVM):</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#voting-classifier">4) Voting Classifier:</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diseno-general-tipo-de-estudio">Diseño general (Tipo de estudio)</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#caracteristicas-del-diseno">Características del Diseño:</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diccionario-de-variables">Diccionario de variables</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#valores-faltantes">Valores faltantes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-hot-encoding">One Hot Encoding</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#smote">SMOTE</a></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
