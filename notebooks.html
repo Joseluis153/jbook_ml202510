@@ -61,7 +61,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Notebooks with MyST Markdown" href="markdown-notebooks.html" />
-    <link rel="prev" title="Informe machine learning severidad de accidentes en estados unidos. Jose Motalvo" href="intro.html" />
+    <link rel="prev" title="Informe machine learning severidad de accidentes en Estados Unidos." href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -175,7 +175,7 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    Informe machine learning severidad de accidentes en estados unidos. Jose Motalvo
+                    Informe machine learning severidad de accidentes en Estados Unidos.
                 </a>
             </li>
         </ul>
@@ -461,117 +461,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;C:\Users\jose_\OneDrive\Documentos guardados\Maestria analisis de datos\Machine Learning Likni\Machine learning Likir\Informe_Machine_Learning\US_Accidents_March23.csv&quot;</span>
-<span class="n">df</span> <span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">path</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;C:\Users\jose_\OneDrive\Documentos guardados\Maestria analisis de datos\Machine Learning Likni\Machine learning Likir\Informe_Machine_Learning\US_Accidents_March23.csv&quot;</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">df</span> <span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-
-<span class="nn">File c:\Users\jose_\anaconda3\envs\ml_venl\lib\site-packages\pandas\io\parsers\readers.py:1026,</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options, dtype_backend)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1013</span> <span class="n">kwds_defaults</span> <span class="o">=</span> <span class="n">_refine_defaults_read</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1014</span>     <span class="n">dialect</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1015</span>     <span class="n">delimiter</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1022</span>     <span class="n">dtype_backend</span><span class="o">=</span><span class="n">dtype_backend</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1023</span> <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1024</span> <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1026</span> <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
-
-<span class="nn">File c:\Users\jose_\anaconda3\envs\ml_venl\lib\site-packages\pandas\io\parsers\readers.py:626,</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
-<span class="g g-Whitespace">    </span><span class="mi">623</span>     <span class="k">return</span> <span class="n">parser</span>
-<span class="g g-Whitespace">    </span><span class="mi">625</span> <span class="k">with</span> <span class="n">parser</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">626</span>     <span class="k">return</span> <span class="n">parser</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">nrows</span><span class="p">)</span>
-
-<span class="nn">File c:\Users\jose_\anaconda3\envs\ml_venl\lib\site-packages\pandas\io\parsers\readers.py:1968,</span> in <span class="ni">TextFileReader.read</span><span class="nt">(self, nrows)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1965</span>     <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1966</span>         <span class="n">new_col_dict</span> <span class="o">=</span> <span class="n">col_dict</span>
-<span class="ne">-&gt; </span><span class="mi">1968</span>     <span class="n">df</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1969</span>         <span class="n">new_col_dict</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1970</span>         <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1971</span>         <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1972</span>         <span class="n">copy</span><span class="o">=</span><span class="ow">not</span> <span class="n">using_copy_on_write</span><span class="p">(),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1973</span>     <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1975</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_currow</span> <span class="o">+=</span> <span class="n">new_rows</span>
-<span class="g g-Whitespace">   </span><span class="mi">1976</span> <span class="k">return</span> <span class="n">df</span>
-
-<span class="nn">File c:\Users\jose_\anaconda3\envs\ml_venl\lib\site-packages\pandas\core\frame.py:778,</span> in <span class="ni">DataFrame.__init__</span><span class="nt">(self, data, index, columns, dtype, copy)</span>
-<span class="g g-Whitespace">    </span><span class="mi">772</span>     <span class="n">mgr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_init_mgr</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">773</span>         <span class="n">data</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="n">index</span><span class="p">,</span> <span class="s2">&quot;columns&quot;</span><span class="p">:</span> <span class="n">columns</span><span class="p">},</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">copy</span>
-<span class="g g-Whitespace">    </span><span class="mi">774</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">776</span> <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">777</span>     <span class="c1"># GH#38939 de facto copy defaults to False only in non-dict cases</span>
-<span class="ne">--&gt; </span><span class="mi">778</span>     <span class="n">mgr</span> <span class="o">=</span> <span class="n">dict_to_mgr</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">,</span> <span class="n">typ</span><span class="o">=</span><span class="n">manager</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">779</span> <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ma</span><span class="o">.</span><span class="n">MaskedArray</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">780</span>     <span class="kn">from</span><span class="w"> </span><span class="nn">numpy.ma</span><span class="w"> </span><span class="kn">import</span> <span class="n">mrecords</span>
-
-<span class="nn">File c:\Users\jose_\anaconda3\envs\ml_venl\lib\site-packages\pandas\core\internals\construction.py:503,</span> in <span class="ni">dict_to_mgr</span><span class="nt">(data, index, columns, dtype, typ, copy)</span>
-<span class="g g-Whitespace">    </span><span class="mi">499</span>     <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">500</span>         <span class="c1"># dtype check to exclude e.g. range objects, scalars</span>
-<span class="g g-Whitespace">    </span><span class="mi">501</span>         <span class="n">arrays</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot;dtype&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">arrays</span><span class="p">]</span>
-<span class="ne">--&gt; </span><span class="mi">503</span> <span class="k">return</span> <span class="n">arrays_to_mgr</span><span class="p">(</span><span class="n">arrays</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span> <span class="n">typ</span><span class="o">=</span><span class="n">typ</span><span class="p">,</span> <span class="n">consolidate</span><span class="o">=</span><span class="n">copy</span><span class="p">)</span>
-
-<span class="nn">File c:\Users\jose_\anaconda3\envs\ml_venl\lib\site-packages\pandas\core\internals\construction.py:119,</span> in <span class="ni">arrays_to_mgr</span><span class="nt">(arrays, columns, index, dtype, verify_integrity, typ, consolidate)</span>
-<span class="g g-Whitespace">    </span><span class="mi">116</span>         <span class="n">index</span> <span class="o">=</span> <span class="n">ensure_index</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">118</span>     <span class="c1"># don&#39;t force copy because getting jammed in an ndarray anyway</span>
-<span class="ne">--&gt; </span><span class="mi">119</span>     <span class="n">arrays</span><span class="p">,</span> <span class="n">refs</span> <span class="o">=</span> <span class="n">_homogenize</span><span class="p">(</span><span class="n">arrays</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">dtype</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">120</span>     <span class="c1"># _homogenize ensures</span>
-<span class="g g-Whitespace">    </span><span class="mi">121</span>     <span class="c1">#  - all(len(x) == len(index) for x in arrays)</span>
-<span class="g g-Whitespace">    </span><span class="mi">122</span>     <span class="c1">#  - all(x.ndim == 1 for x in arrays)</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">125</span> 
-<span class="g g-Whitespace">    </span><span class="mi">126</span> <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">127</span>     <span class="n">index</span> <span class="o">=</span> <span class="n">ensure_index</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
-
-<span class="nn">File c:\Users\jose_\anaconda3\envs\ml_venl\lib\site-packages\pandas\core\internals\construction.py:629,</span> in <span class="ni">_homogenize</span><span class="nt">(data, index, dtype)</span>
-<span class="g g-Whitespace">    </span><span class="mi">626</span>         <span class="n">val</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">627</span>     <span class="n">val</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">fast_multiget</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">oindex</span><span class="o">.</span><span class="n">_values</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">629</span> <span class="n">val</span> <span class="o">=</span> <span class="n">sanitize_array</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">630</span> <span class="n">com</span><span class="o">.</span><span class="n">require_length_match</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">631</span> <span class="n">refs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
-
-<span class="nn">File c:\Users\jose_\anaconda3\envs\ml_venl\lib\site-packages\pandas\core\construction.py:606,</span> in <span class="ni">sanitize_array</span><span class="nt">(data, index, dtype, copy, allow_2d)</span>
-<span class="g g-Whitespace">    </span><span class="mi">604</span> <span class="n">subarr</span> <span class="o">=</span> <span class="n">data</span>
-<span class="g g-Whitespace">    </span><span class="mi">605</span> <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="nb">object</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">606</span>     <span class="n">subarr</span> <span class="o">=</span> <span class="n">maybe_infer_to_datetimelike</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">607</span>     <span class="k">if</span> <span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">608</span>         <span class="n">object_index</span>
-<span class="g g-Whitespace">    </span><span class="mi">609</span>         <span class="ow">and</span> <span class="n">using_pyarrow_string_dtype</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">610</span>         <span class="ow">and</span> <span class="n">is_string_dtype</span><span class="p">(</span><span class="n">subarr</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">611</span>     <span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">612</span>         <span class="c1"># Avoid inference when string option is set</span>
-<span class="g g-Whitespace">    </span><span class="mi">613</span>         <span class="n">subarr</span> <span class="o">=</span> <span class="n">data</span>
-
-<span class="nn">File c:\Users\jose_\anaconda3\envs\ml_venl\lib\site-packages\pandas\core\dtypes\cast.py:1189,</span> in <span class="ni">maybe_infer_to_datetimelike</span><span class="nt">(value)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1184</span>     <span class="k">return</span> <span class="n">value</span>
-<span class="g g-Whitespace">   </span><span class="mi">1186</span> <span class="c1"># error: Incompatible return value type (got &quot;Union[ExtensionArray,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1187</span> <span class="c1"># ndarray[Any, Any]]&quot;, expected &quot;Union[ndarray[Any, Any], DatetimeArray,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1188</span> <span class="c1"># TimedeltaArray, PeriodArray, IntervalArray]&quot;)</span>
-<span class="ne">-&gt; </span><span class="mi">1189</span> <span class="k">return</span> <span class="n">lib</span><span class="o">.</span><span class="n">maybe_convert_objects</span><span class="p">(</span>  <span class="c1"># type: ignore[return-value]</span>
-<span class="g g-Whitespace">   </span><span class="mi">1190</span>     <span class="n">value</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1191</span>     <span class="c1"># Here we do not convert numeric dtypes, as if we wanted that,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1192</span>     <span class="c1">#  numpy would have done it for us.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1193</span>     <span class="n">convert_numeric</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1194</span>     <span class="n">convert_non_numeric</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1195</span>     <span class="n">dtype_if_all_nat</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s2">&quot;M8[ns]&quot;</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1196</span> <span class="p">)</span>
-
-<span class="nn">File lib.pyx:2543,</span> in <span class="ni">pandas._libs.lib.maybe_convert_objects</span><span class="nt">()</span>
-
-<span class="nn">File c:\Users\jose_\anaconda3\envs\ml_venl\lib\site-packages\numpy\core\numeric.py:344,</span> in <span class="ni">full</span><span class="nt">(shape, fill_value, dtype, order, like)</span>
-<span class="g g-Whitespace">    </span><span class="mi">342</span>     <span class="n">dtype</span> <span class="o">=</span> <span class="n">fill_value</span><span class="o">.</span><span class="n">dtype</span>
-<span class="g g-Whitespace">    </span><span class="mi">343</span> <span class="n">a</span> <span class="o">=</span> <span class="n">empty</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">order</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">344</span> <span class="n">multiarray</span><span class="o">.</span><span class="n">copyto</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">fill_value</span><span class="p">,</span> <span class="n">casting</span><span class="o">=</span><span class="s1">&#39;unsafe&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">345</span> <span class="k">return</span> <span class="n">a</span>
-
-<span class="nn">File &lt;__array_function__ internals&gt;:180,</span> in <span class="ni">copyto</span><span class="nt">(*args, **kwargs)</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;C:\Users\jose_\OneDrive\Documentos guardados\Maestria analisis de datos\Machine Learning Likni\Machine learning Likir\Informe_Machine_Learning\US_Accidents_March23.csv&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -694,8 +584,123 @@ memory usage: 2.0+ GB
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Initial memory usage of dataframe is 10870.28 MB/10.62 GB
-Memory usage after optimization is: 3582.58 MB/3.50 GB
-Decreased by 67.0%
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">df</span> <span class="o">=</span> <span class="n">reduce_mem_usage</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="nn">Cell In[5], line 31,</span> in <span class="ni">reduce_mem_usage</span><span class="nt">(df)</span>
+<span class="g g-Whitespace">     </span><span class="mi">29</span>                 <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">30</span>     <span class="k">else</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">31</span>         <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">33</span> <span class="n">end_mem</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1024</span><span class="o">**</span><span class="mi">2</span>
+<span class="g g-Whitespace">     </span><span class="mi">34</span> <span class="n">end_mem_GB</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1024</span><span class="o">**</span><span class="mi">3</span>
+
+<span class="nn">File c:\Users\jose_\anaconda3\envs\ml_venl\lib\site-packages\pandas\core\generic.py:6643,</span> in <span class="ni">NDFrame.astype</span><span class="nt">(self, dtype, copy, errors)</span>
+<span class="g g-Whitespace">   </span><span class="mi">6637</span>     <span class="n">results</span> <span class="o">=</span> <span class="p">[</span>
+<span class="nn">   6638         ser.astype(dtype, copy=copy, errors=errors) for _, ser</span> in <span class="ni">self.items</span><span class="nt">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">6639</span>     <span class="p">]</span>
+<span class="g g-Whitespace">   </span><span class="mi">6641</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">6642</span>     <span class="c1"># else, only a single dtype is given</span>
+<span class="ne">-&gt; </span><span class="mi">6643</span>     <span class="n">new_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mgr</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">6644</span>     <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_constructor_from_mgr</span><span class="p">(</span><span class="n">new_data</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">new_data</span><span class="o">.</span><span class="n">axes</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">6645</span>     <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="n">__finalize__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;astype&quot;</span><span class="p">)</span>
+
+<span class="nn">File c:\Users\jose_\anaconda3\envs\ml_venl\lib\site-packages\pandas\core\internals\managers.py:430,</span> in <span class="ni">BaseBlockManager.astype</span><span class="nt">(self, dtype, copy, errors)</span>
+<span class="g g-Whitespace">    </span><span class="mi">427</span> <span class="k">elif</span> <span class="n">using_copy_on_write</span><span class="p">():</span>
+<span class="g g-Whitespace">    </span><span class="mi">428</span>     <span class="n">copy</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="ne">--&gt; </span><span class="mi">430</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">431</span>     <span class="s2">&quot;astype&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">432</span>     <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">433</span>     <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">434</span>     <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">435</span>     <span class="n">using_cow</span><span class="o">=</span><span class="n">using_copy_on_write</span><span class="p">(),</span>
+<span class="g g-Whitespace">    </span><span class="mi">436</span> <span class="p">)</span>
+
+<span class="nn">File c:\Users\jose_\anaconda3\envs\ml_venl\lib\site-packages\pandas\core\internals\managers.py:363,</span> in <span class="ni">BaseBlockManager.apply</span><span class="nt">(self, f, align_keys, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">361</span>         <span class="n">applied</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">362</span>     <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">363</span>         <span class="n">applied</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">f</span><span class="p">)(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">364</span>     <span class="n">result_blocks</span> <span class="o">=</span> <span class="n">extend_blocks</span><span class="p">(</span><span class="n">applied</span><span class="p">,</span> <span class="n">result_blocks</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">366</span> <span class="n">out</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">from_blocks</span><span class="p">(</span><span class="n">result_blocks</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="p">)</span>
+
+<span class="nn">File c:\Users\jose_\anaconda3\envs\ml_venl\lib\site-packages\pandas\core\internals\blocks.py:758,</span> in <span class="ni">Block.astype</span><span class="nt">(self, dtype, copy, errors, using_cow, squeeze)</span>
+<span class="g g-Whitespace">    </span><span class="mi">755</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Can not squeeze with more than one column.&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">756</span>     <span class="n">values</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>  <span class="c1"># type: ignore[call-overload]</span>
+<span class="ne">--&gt; </span><span class="mi">758</span> <span class="n">new_values</span> <span class="o">=</span> <span class="n">astype_array_safe</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">760</span> <span class="n">new_values</span> <span class="o">=</span> <span class="n">maybe_coerce_values</span><span class="p">(</span><span class="n">new_values</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">762</span> <span class="n">refs</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="nn">File c:\Users\jose_\anaconda3\envs\ml_venl\lib\site-packages\pandas\core\dtypes\astype.py:237,</span> in <span class="ni">astype_array_safe</span><span class="nt">(values, dtype, copy, errors)</span>
+<span class="g g-Whitespace">    </span><span class="mi">234</span>     <span class="n">dtype</span> <span class="o">=</span> <span class="n">dtype</span><span class="o">.</span><span class="n">numpy_dtype</span>
+<span class="g g-Whitespace">    </span><span class="mi">236</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">237</span>     <span class="n">new_values</span> <span class="o">=</span> <span class="n">astype_array</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">238</span> <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">239</span>     <span class="c1"># e.g. _astype_nansafe can fail on object-dtype of strings</span>
+<span class="g g-Whitespace">    </span><span class="mi">240</span>     <span class="c1">#  trying to convert to float</span>
+<span class="g g-Whitespace">    </span><span class="mi">241</span>     <span class="k">if</span> <span class="n">errors</span> <span class="o">==</span> <span class="s2">&quot;ignore&quot;</span><span class="p">:</span>
+
+<span class="nn">File c:\Users\jose_\anaconda3\envs\ml_venl\lib\site-packages\pandas\core\dtypes\astype.py:182,</span> in <span class="ni">astype_array</span><span class="nt">(values, dtype, copy)</span>
+<span class="g g-Whitespace">    </span><span class="mi">179</span>     <span class="n">values</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">dtype</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">181</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">182</span>     <span class="n">values</span> <span class="o">=</span> <span class="n">_astype_nansafe</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">184</span> <span class="c1"># in pandas we don&#39;t store numpy str dtypes, so convert to object</span>
+<span class="g g-Whitespace">    </span><span class="mi">185</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+
+<span class="nn">File c:\Users\jose_\anaconda3\envs\ml_venl\lib\site-packages\pandas\core\dtypes\astype.py:80,</span> in <span class="ni">_astype_nansafe</span><span class="nt">(arr, dtype, copy, skipna)</span>
+<span class="g g-Whitespace">     </span><span class="mi">78</span> <span class="c1"># dispatch on extension dtype if needed</span>
+<span class="g g-Whitespace">     </span><span class="mi">79</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dtype</span><span class="p">,</span> <span class="n">ExtensionDtype</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">80</span>     <span class="k">return</span> <span class="n">dtype</span><span class="o">.</span><span class="n">construct_array_type</span><span class="p">()</span><span class="o">.</span><span class="n">_from_sequence</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">82</span> <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
+<span class="g g-Whitespace">     </span><span class="mi">83</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;dtype must be np.dtype or ExtensionDtype&quot;</span><span class="p">)</span>
+
+<span class="nn">File c:\Users\jose_\anaconda3\envs\ml_venl\lib\site-packages\pandas\core\arrays\categorical.py:521,</span> in <span class="ni">Categorical._from_sequence</span><span class="nt">(cls, scalars, dtype, copy)</span>
+<span class="g g-Whitespace">    </span><span class="mi">517</span> <span class="nd">@classmethod</span>
+<span class="g g-Whitespace">    </span><span class="mi">518</span> <span class="k">def</span><span class="w"> </span><span class="nf">_from_sequence</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">519</span>     <span class="bp">cls</span><span class="p">,</span> <span class="n">scalars</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="n">Dtype</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">copy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="g g-Whitespace">    </span><span class="mi">520</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">521</span>     <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">scalars</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">)</span>
+
+<span class="nn">File c:\Users\jose_\anaconda3\envs\ml_venl\lib\site-packages\pandas\core\arrays\categorical.py:460,</span> in <span class="ni">Categorical.__init__</span><span class="nt">(self, values, categories, ordered, dtype, fastpath, copy)</span>
+<span class="g g-Whitespace">    </span><span class="mi">458</span>     <span class="n">values</span> <span class="o">=</span> <span class="n">sanitize_array</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">459</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">460</span>     <span class="n">codes</span><span class="p">,</span> <span class="n">categories</span> <span class="o">=</span> <span class="n">factorize</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">461</span> <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">462</span>     <span class="n">codes</span><span class="p">,</span> <span class="n">categories</span> <span class="o">=</span> <span class="n">factorize</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nn">File c:\Users\jose_\anaconda3\envs\ml_venl\lib\site-packages\pandas\core\algorithms.py:802,</span> in <span class="ni">factorize</span><span class="nt">(values, sort, use_na_sentinel, size_hint)</span>
+<span class="g g-Whitespace">    </span><span class="mi">795</span>     <span class="n">codes</span><span class="p">,</span> <span class="n">uniques</span> <span class="o">=</span> <span class="n">factorize_array</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">796</span>         <span class="n">values</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">797</span>         <span class="n">use_na_sentinel</span><span class="o">=</span><span class="n">use_na_sentinel</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">798</span>         <span class="n">size_hint</span><span class="o">=</span><span class="n">size_hint</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">799</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">801</span> <span class="k">if</span> <span class="n">sort</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">uniques</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">802</span>     <span class="n">uniques</span><span class="p">,</span> <span class="n">codes</span> <span class="o">=</span> <span class="n">safe_sort</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">803</span>         <span class="n">uniques</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">804</span>         <span class="n">codes</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">805</span>         <span class="n">use_na_sentinel</span><span class="o">=</span><span class="n">use_na_sentinel</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">806</span>         <span class="n">assume_unique</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">807</span>         <span class="n">verify</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">808</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">810</span> <span class="n">uniques</span> <span class="o">=</span> <span class="n">_reconstruct_data</span><span class="p">(</span><span class="n">uniques</span><span class="p">,</span> <span class="n">original</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">original</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">812</span> <span class="k">return</span> <span class="n">codes</span><span class="p">,</span> <span class="n">uniques</span>
+
+<span class="nn">File c:\Users\jose_\anaconda3\envs\ml_venl\lib\site-packages\pandas\core\algorithms.py:1517,</span> in <span class="ni">safe_sort</span><span class="nt">(values, codes, use_na_sentinel, assume_unique, verify)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1515</span> <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1516</span>     <span class="n">sorter</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">argsort</span><span class="p">()</span>
+<span class="ne">-&gt; </span><span class="mi">1517</span>     <span class="n">ordered</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="n">sorter</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1518</span> <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="n">decimal</span><span class="o">.</span><span class="n">InvalidOperation</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1519</span>     <span class="c1"># Previous sorters failed or were not applicable, try `_sort_mixed`</span>
+<span class="g g-Whitespace">   </span><span class="mi">1520</span>     <span class="c1"># which would work, but which fails for special case of 1d arrays</span>
+<span class="g g-Whitespace">   </span><span class="mi">1521</span>     <span class="c1"># with tuples.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1522</span>     <span class="k">if</span> <span class="n">values</span><span class="o">.</span><span class="n">size</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">tuple</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1523</span>         <span class="c1"># error: Argument 1 to &quot;_sort_tuples&quot; has incompatible type</span>
+<span class="g g-Whitespace">   </span><span class="mi">1524</span>         <span class="c1"># &quot;Union[Index, ExtensionArray, ndarray[Any, Any]]&quot;; expected</span>
+<span class="g g-Whitespace">   </span><span class="mi">1525</span>         <span class="c1"># &quot;ndarray[Any, Any]&quot;</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>
@@ -2239,7 +2244,7 @@ La visibilidad es en promedio de 9.2 millas, con la mayoría de los accidentes t
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Informe machine learning severidad de accidentes en estados unidos. Jose Motalvo</p>
+        <p class="prev-next-title">Informe machine learning severidad de accidentes en Estados Unidos.</p>
       </div>
     </a>
     <a class="right-next"
