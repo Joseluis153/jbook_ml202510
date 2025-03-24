@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Metodología &#8212; Machine Learning</title>
+    <title>Resumen &#8212; Machine Learning</title>
   
   
   
@@ -61,7 +61,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Notebooks with MyST Markdown" href="markdown-notebooks.html" />
-    <link rel="prev" title="Welcome to your Jupyter Book" href="intro.html" />
+    <link rel="prev" title="Informe machine learning severidad de accidentes en estados unidos. Jose Motalvo" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -175,12 +175,12 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    Welcome to your Jupyter Book
+                    Informe machine learning severidad de accidentes en estados unidos. Jose Motalvo
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Metodología</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Resumen</a></li>
 
 
 
@@ -370,7 +370,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Metodología</h1>
+    <h1>Resumen</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -380,7 +380,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Metodología</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Resumen</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#poblacion">Población:</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#muestra">Muestra:</a></li>
 </ul>
@@ -403,8 +403,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="metodologia">
-<h1>Metodología<a class="headerlink" href="#metodologia" title="Link to this heading">#</a></h1>
+  <section id="resumen">
+<h1>Resumen<a class="headerlink" href="#resumen" title="Link to this heading">#</a></h1>
 <section id="poblacion">
 <h2>Población:<a class="headerlink" href="#poblacion" title="Link to this heading">#</a></h2>
 <p>La población de interés para este estudio comprende todos los accidentes vehiculares que se han registrado en los Estados Unidos desde el inicio del año 2016 hasta la fecha más reciente disponible en nuestro conjunto de datos.</p>
@@ -463,6 +463,115 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;C:\Users\jose_\OneDrive\Documentos guardados\Maestria analisis de datos\Machine Learning Likni\Machine learning Likir\Informe_Machine_Learning\US_Accidents_March23.csv&quot;</span>
 <span class="n">df</span> <span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">path</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;C:\Users\jose_\OneDrive\Documentos guardados\Maestria analisis de datos\Machine Learning Likni\Machine learning Likir\Informe_Machine_Learning\US_Accidents_March23.csv&quot;</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">df</span> <span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+<span class="nn">File c:\Users\jose_\anaconda3\envs\ml_venl\lib\site-packages\pandas\io\parsers\readers.py:1026,</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options, dtype_backend)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1013</span> <span class="n">kwds_defaults</span> <span class="o">=</span> <span class="n">_refine_defaults_read</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1014</span>     <span class="n">dialect</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1015</span>     <span class="n">delimiter</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1022</span>     <span class="n">dtype_backend</span><span class="o">=</span><span class="n">dtype_backend</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1023</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1024</span> <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1026</span> <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+
+<span class="nn">File c:\Users\jose_\anaconda3\envs\ml_venl\lib\site-packages\pandas\io\parsers\readers.py:626,</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">623</span>     <span class="k">return</span> <span class="n">parser</span>
+<span class="g g-Whitespace">    </span><span class="mi">625</span> <span class="k">with</span> <span class="n">parser</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">626</span>     <span class="k">return</span> <span class="n">parser</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">nrows</span><span class="p">)</span>
+
+<span class="nn">File c:\Users\jose_\anaconda3\envs\ml_venl\lib\site-packages\pandas\io\parsers\readers.py:1968,</span> in <span class="ni">TextFileReader.read</span><span class="nt">(self, nrows)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1965</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1966</span>         <span class="n">new_col_dict</span> <span class="o">=</span> <span class="n">col_dict</span>
+<span class="ne">-&gt; </span><span class="mi">1968</span>     <span class="n">df</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1969</span>         <span class="n">new_col_dict</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1970</span>         <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1971</span>         <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1972</span>         <span class="n">copy</span><span class="o">=</span><span class="ow">not</span> <span class="n">using_copy_on_write</span><span class="p">(),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1973</span>     <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1975</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_currow</span> <span class="o">+=</span> <span class="n">new_rows</span>
+<span class="g g-Whitespace">   </span><span class="mi">1976</span> <span class="k">return</span> <span class="n">df</span>
+
+<span class="nn">File c:\Users\jose_\anaconda3\envs\ml_venl\lib\site-packages\pandas\core\frame.py:778,</span> in <span class="ni">DataFrame.__init__</span><span class="nt">(self, data, index, columns, dtype, copy)</span>
+<span class="g g-Whitespace">    </span><span class="mi">772</span>     <span class="n">mgr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_init_mgr</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">773</span>         <span class="n">data</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="n">index</span><span class="p">,</span> <span class="s2">&quot;columns&quot;</span><span class="p">:</span> <span class="n">columns</span><span class="p">},</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">copy</span>
+<span class="g g-Whitespace">    </span><span class="mi">774</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">776</span> <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">777</span>     <span class="c1"># GH#38939 de facto copy defaults to False only in non-dict cases</span>
+<span class="ne">--&gt; </span><span class="mi">778</span>     <span class="n">mgr</span> <span class="o">=</span> <span class="n">dict_to_mgr</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">,</span> <span class="n">typ</span><span class="o">=</span><span class="n">manager</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">779</span> <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ma</span><span class="o">.</span><span class="n">MaskedArray</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">780</span>     <span class="kn">from</span><span class="w"> </span><span class="nn">numpy.ma</span><span class="w"> </span><span class="kn">import</span> <span class="n">mrecords</span>
+
+<span class="nn">File c:\Users\jose_\anaconda3\envs\ml_venl\lib\site-packages\pandas\core\internals\construction.py:503,</span> in <span class="ni">dict_to_mgr</span><span class="nt">(data, index, columns, dtype, typ, copy)</span>
+<span class="g g-Whitespace">    </span><span class="mi">499</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">500</span>         <span class="c1"># dtype check to exclude e.g. range objects, scalars</span>
+<span class="g g-Whitespace">    </span><span class="mi">501</span>         <span class="n">arrays</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot;dtype&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">arrays</span><span class="p">]</span>
+<span class="ne">--&gt; </span><span class="mi">503</span> <span class="k">return</span> <span class="n">arrays_to_mgr</span><span class="p">(</span><span class="n">arrays</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span> <span class="n">typ</span><span class="o">=</span><span class="n">typ</span><span class="p">,</span> <span class="n">consolidate</span><span class="o">=</span><span class="n">copy</span><span class="p">)</span>
+
+<span class="nn">File c:\Users\jose_\anaconda3\envs\ml_venl\lib\site-packages\pandas\core\internals\construction.py:119,</span> in <span class="ni">arrays_to_mgr</span><span class="nt">(arrays, columns, index, dtype, verify_integrity, typ, consolidate)</span>
+<span class="g g-Whitespace">    </span><span class="mi">116</span>         <span class="n">index</span> <span class="o">=</span> <span class="n">ensure_index</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">118</span>     <span class="c1"># don&#39;t force copy because getting jammed in an ndarray anyway</span>
+<span class="ne">--&gt; </span><span class="mi">119</span>     <span class="n">arrays</span><span class="p">,</span> <span class="n">refs</span> <span class="o">=</span> <span class="n">_homogenize</span><span class="p">(</span><span class="n">arrays</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">dtype</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">120</span>     <span class="c1"># _homogenize ensures</span>
+<span class="g g-Whitespace">    </span><span class="mi">121</span>     <span class="c1">#  - all(len(x) == len(index) for x in arrays)</span>
+<span class="g g-Whitespace">    </span><span class="mi">122</span>     <span class="c1">#  - all(x.ndim == 1 for x in arrays)</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">125</span> 
+<span class="g g-Whitespace">    </span><span class="mi">126</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">127</span>     <span class="n">index</span> <span class="o">=</span> <span class="n">ensure_index</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+
+<span class="nn">File c:\Users\jose_\anaconda3\envs\ml_venl\lib\site-packages\pandas\core\internals\construction.py:629,</span> in <span class="ni">_homogenize</span><span class="nt">(data, index, dtype)</span>
+<span class="g g-Whitespace">    </span><span class="mi">626</span>         <span class="n">val</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">627</span>     <span class="n">val</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">fast_multiget</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">oindex</span><span class="o">.</span><span class="n">_values</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">629</span> <span class="n">val</span> <span class="o">=</span> <span class="n">sanitize_array</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">630</span> <span class="n">com</span><span class="o">.</span><span class="n">require_length_match</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">631</span> <span class="n">refs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="nn">File c:\Users\jose_\anaconda3\envs\ml_venl\lib\site-packages\pandas\core\construction.py:606,</span> in <span class="ni">sanitize_array</span><span class="nt">(data, index, dtype, copy, allow_2d)</span>
+<span class="g g-Whitespace">    </span><span class="mi">604</span> <span class="n">subarr</span> <span class="o">=</span> <span class="n">data</span>
+<span class="g g-Whitespace">    </span><span class="mi">605</span> <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="nb">object</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">606</span>     <span class="n">subarr</span> <span class="o">=</span> <span class="n">maybe_infer_to_datetimelike</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">607</span>     <span class="k">if</span> <span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">608</span>         <span class="n">object_index</span>
+<span class="g g-Whitespace">    </span><span class="mi">609</span>         <span class="ow">and</span> <span class="n">using_pyarrow_string_dtype</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">610</span>         <span class="ow">and</span> <span class="n">is_string_dtype</span><span class="p">(</span><span class="n">subarr</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">611</span>     <span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">612</span>         <span class="c1"># Avoid inference when string option is set</span>
+<span class="g g-Whitespace">    </span><span class="mi">613</span>         <span class="n">subarr</span> <span class="o">=</span> <span class="n">data</span>
+
+<span class="nn">File c:\Users\jose_\anaconda3\envs\ml_venl\lib\site-packages\pandas\core\dtypes\cast.py:1189,</span> in <span class="ni">maybe_infer_to_datetimelike</span><span class="nt">(value)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1184</span>     <span class="k">return</span> <span class="n">value</span>
+<span class="g g-Whitespace">   </span><span class="mi">1186</span> <span class="c1"># error: Incompatible return value type (got &quot;Union[ExtensionArray,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1187</span> <span class="c1"># ndarray[Any, Any]]&quot;, expected &quot;Union[ndarray[Any, Any], DatetimeArray,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1188</span> <span class="c1"># TimedeltaArray, PeriodArray, IntervalArray]&quot;)</span>
+<span class="ne">-&gt; </span><span class="mi">1189</span> <span class="k">return</span> <span class="n">lib</span><span class="o">.</span><span class="n">maybe_convert_objects</span><span class="p">(</span>  <span class="c1"># type: ignore[return-value]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1190</span>     <span class="n">value</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1191</span>     <span class="c1"># Here we do not convert numeric dtypes, as if we wanted that,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1192</span>     <span class="c1">#  numpy would have done it for us.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1193</span>     <span class="n">convert_numeric</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1194</span>     <span class="n">convert_non_numeric</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1195</span>     <span class="n">dtype_if_all_nat</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s2">&quot;M8[ns]&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1196</span> <span class="p">)</span>
+
+<span class="nn">File lib.pyx:2543,</span> in <span class="ni">pandas._libs.lib.maybe_convert_objects</span><span class="nt">()</span>
+
+<span class="nn">File c:\Users\jose_\anaconda3\envs\ml_venl\lib\site-packages\numpy\core\numeric.py:344,</span> in <span class="ni">full</span><span class="nt">(shape, fill_value, dtype, order, like)</span>
+<span class="g g-Whitespace">    </span><span class="mi">342</span>     <span class="n">dtype</span> <span class="o">=</span> <span class="n">fill_value</span><span class="o">.</span><span class="n">dtype</span>
+<span class="g g-Whitespace">    </span><span class="mi">343</span> <span class="n">a</span> <span class="o">=</span> <span class="n">empty</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">order</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">344</span> <span class="n">multiarray</span><span class="o">.</span><span class="n">copyto</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">fill_value</span><span class="p">,</span> <span class="n">casting</span><span class="o">=</span><span class="s1">&#39;unsafe&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">345</span> <span class="k">return</span> <span class="n">a</span>
+
+<span class="nn">File &lt;__array_function__ internals&gt;:180,</span> in <span class="ni">copyto</span><span class="nt">(*args, **kwargs)</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>
@@ -2130,7 +2239,7 @@ La visibilidad es en promedio de 9.2 millas, con la mayoría de los accidentes t
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Welcome to your Jupyter Book</p>
+        <p class="prev-next-title">Informe machine learning severidad de accidentes en estados unidos. Jose Motalvo</p>
       </div>
     </a>
     <a class="right-next"
@@ -2158,7 +2267,7 @@ La visibilidad es en promedio de 9.2 millas, con la mayoría de los accidentes t
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Metodología</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Resumen</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#poblacion">Población:</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#muestra">Muestra:</a></li>
 </ul>
